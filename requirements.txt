@@ -36,6 +36,7 @@ httpie
 imageio
 imageio-ffmpeg
 imbalanced-learn
+imgaug
 iniconfig
 ipykernel
 ipympl
@@ -77,6 +78,7 @@ pdfminer.six
 pillow
 pip
 plotly
+Poutyne
 psycopg2
 PuLP
 pyautogui
