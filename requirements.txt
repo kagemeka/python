@@ -1,5 +1,6 @@
 ansible
 AudioConverter
+av
 beautifulsoup4
 bokeh
 boto3
@@ -21,6 +22,7 @@ ffmpeg-python
 flask
 flask-marshmallow
 flask-ngrok
+fvcore
 gensim
 ggplot
 git+https://github.com/tensorflow/docs
@@ -92,6 +94,7 @@ pyinstaller
 pylint
 pymc3
 pyngrok
+pysftp
 PySimpleGUI
 pytesseract
 python-Levenshtein
@@ -128,6 +131,8 @@ tfds-nightly
 toml
 torch
 torchaudio 
+torchtext
+torchvideo
 torchvision
 tqdm
 transformers 
