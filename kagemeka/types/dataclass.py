@@ -1,3 +1,6 @@
+from __future__ import (
+  annotations,
+)
 from dataclasses import (
   dataclass,
   astuple,
@@ -26,7 +29,6 @@ class DataClass(ABC):
     return iter(self.values)
 
 
-  @property
   def dic(self):
     return asdict(self)
 
@@ -52,7 +54,18 @@ class DataClass(ABC):
   ):
     return cls(**dic)
 
+  @classmethod
+  def from_yml(
+    cls,
+    path: str,
+  ) -> cls:
+    from kagemeka.io import (
+      yml,
+    )
+    load = yml.Load()
+    return cls(**load(path))
   
+
   def __contains__(
     self,
     item: str,
@@ -78,5 +91,5 @@ class DataClass(ABC):
   ) -> pd.DataFrame:
     data = self.dic()
     data = pd.Series(data)
-    data = data.to_frame().T
-    return data
+    return data.to_frame().T
+
