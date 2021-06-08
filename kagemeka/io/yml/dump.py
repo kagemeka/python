@@ -3,7 +3,7 @@ import typing
 class Dump():
   def __call__(
     self,
-    data: object,
+    data: typing.Any,
     path: str,
   ) -> typing.NoReturn:
     with open(

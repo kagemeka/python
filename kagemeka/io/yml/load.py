@@ -1,9 +1,11 @@
+import typing
+
 
 class Load():
   def __call__(
     self,
     path: str,
-  ) -> object:
+  ) -> typing.Any:
     import yaml
     with open(
       file=path,
