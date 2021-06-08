@@ -1,11 +1,13 @@
 import typing
 
+
 class Dump():
   def __call__(
     self,
     data: typing.Any,
     path: str,
   ) -> typing.NoReturn:
+    import yaml
     with open(
       file=path,
       mode='w',
@@ -14,5 +16,3 @@ class Dump():
         data=data,
         stream=stream,
       )
-    
-      
