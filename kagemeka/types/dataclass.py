@@ -93,3 +93,4 @@ class DataClass(ABC):
     data = pd.Series(data)
     return data.to_frame().T
 
+  \

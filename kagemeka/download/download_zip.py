@@ -15,6 +15,11 @@ class Cfg():
 
 
 class DownloadZip():
+  r'''
+  
+  download zip and extract it
+
+  '''
   
   def __call__(
     self,
