@@ -1,0 +1,16 @@
+{
+  "classification":{
+    "batch_size": 1024,
+    "epochs": 100,
+    "patience": 10,
+    "tokenizer_path": "data/tokenizer.json",
+    "tokenizer_gen_path": "data/tokenizer_gen.json"
+  },
+  "similarity": {
+    "pos": ["名詞", "動詞"]
+  },
+  "keyword_extraction": {
+    "tfidf_path": "model/tfidf.pickle"
+  },
+  "past_texts": "data/past_texts.pickle"
+}
