@@ -112,7 +112,7 @@ class WikiCorpusGen:
           continue 
         f.write(chunk)
         pbar.update(bufsize)
-    pbar.close()
+    pbar.close()            
     print('download: done.')
 
 
