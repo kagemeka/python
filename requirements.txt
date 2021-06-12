@@ -142,6 +142,7 @@ uvicorn
 webdriver_manager
 wget
 wikiextractor
+wordcloud     
 xgboost
 xlrd==1.2.0
 XlsxWriter
