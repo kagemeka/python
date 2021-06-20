@@ -25,7 +25,7 @@ flask-ngrok
 fvcore
 gensim
 ggplot
-# git+https://github.com/tensorflow/docs
+git+https://github.com/tensorflow/docs
 google-api-python-client
 google-auth
 google-cloud-bigquery
@@ -120,14 +120,14 @@ sympy
 tensorboard 
 tensorboardX 
 tensorflow-addons
-# tensorflow-datasets
+tensorflow-datasets
 tensorflow==2.5.0
 tensorflow-hub
 tensorflow-io
-# tensorflow-text
+tensorflow-text
 texthero
 tfds-nightly
-# tf-models-official
+tf-models-official
 # tf-nightly
 toml
 torch
