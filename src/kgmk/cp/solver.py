@@ -1,55 +1,36 @@
-from \
-  ..gen.io.reading.std_reader \
-import (
-  StdReader,
-)
-
-
-# cut below
-
-
 from abc import (
   ABC,
   abstractmethod,
 )
+import typing
 
 
-class Solver(ABC):
 
-
-  def __init__(self):
-    self.reader = StdReader()
-
-
+class Solver(
+  ABC,
+):
   def __call__(
     self,
-  ):
-    self.prepare()
-    self.solve()
+  ) -> typing.NoReturn:
+    self._prepare()
+    self._solve()
+
+  
+  def __init__(
+    self,
+  ) -> typing.NoReturn:
+    ...
 
 
   @abstractmethod
-  def prepare(self):
-    ...
-      
-
-  @abstractmethod 
-  def solve(self):
+  def _prepare(
+    self,
+  ) -> typing.NoReturn:
     ...
 
-
-
-import numpy as np
-
-
-class Problem(
-  Solver,
-):
-
-
-  def prepare(self):
-    ...
-
-
-  def solve(self):
+  
+  @abstractmethod
+  def _solve(
+    self,
+  ) -> typing.NoReturn:
     ...
