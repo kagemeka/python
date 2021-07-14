@@ -11,15 +11,14 @@ cfd = os.path.abspath(cfd)
 
 req = f'{cfd}/requirements.txt'
 
-# reader = Reader(src=req)
-# with reader as r:
 with open(req, mode='r') as f:
-    reqs = f.read().split()
-    # reqs = r.lines()
+    ls = f.readlines()
     reqs = [
-        req
-        for req in reqs
-        if '+https' not in req
+        l.rstrip()
+        for l in ls
+        if not l.startswith(
+            'git+',
+        )
     ]
 
 
@@ -30,7 +29,7 @@ setuptools.setup(
     description="",
     long_description="",
     long_description_content_type="text/markdown",
-    url="https://github.com/kagemeka/myenv/lib/python/kagemeka",
+    url="https://github.com/kagemeka/py",
     author="kagemeka",
     author_email="kagemeka1@gmail.com",
     maintainer='kagemeka',
@@ -42,8 +41,11 @@ setuptools.setup(
         "Programming Language :: Python :: 3.9",
         "Operating System :: POSIX :: Linux",
     ],
+    package_dir={
+        '': 'src',
+    },
     packages=find_packages(
-        where='.',
+        where='./src/',
     ),
     include_package_data=True,
     install_requires=reqs,
