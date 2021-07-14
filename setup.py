@@ -1,3 +1,5 @@
+version = '0.1.2'
+
 import typing
 import pathlib
 from setuptools import (
@@ -10,7 +12,7 @@ import os
 cfd = os.path.dirname(__file__)
 cfd = os.path.abspath(cfd)
 
-class RequirementsFromFile():
+class ReadRequirements():
   def __call__(
     self,
     path: str,
@@ -29,16 +31,63 @@ class RequirementsFromFile():
       ]
     return ls
 
-get = RequirementsFromFile()
-reqs = get(
+
+class GetExtrasRequire():
+  def __call__(
+    self,
+    root_dir: str,
+  ) -> typing.NoReturn:
+    self.__root_dir = root_dir
+    self.__find_paths()
+    self.__get_require()
+    return self.__require
+  
+
+  def __get_require(
+    self,
+  ) -> typing.NoReturn:
+    import os
+    paths = self.__paths
+    fn = ReadRequirements()
+    req = dict()
+    for p in paths:
+      name = p.split(
+        os.path.sep,
+      )[-2]
+      requires = fn(p)
+      req[name] = requires
+    self.__require = req
+
+      
+  def __find_paths(
+    self,
+  ) -> typing.NoReturn:
+    from glob import (
+      glob,
+    )
+    self.__paths = glob(
+      f'{self.__root_dir}/**/'
+      'requirements.txt',
+      recursive=True,
+    )
+    
+    
+
+
+
+read = ReadRequirements()
+reqs = read(
   f'{cfd}/requirements.txt',
+)
+extras = GetExtrasRequire()(
+  f'{cfd}/src/'
 )
 
 
 
 setuptools.setup(
   name="kagemeka",
-  version="0.1.1",
+  version=version,
   description="",
   long_description="",
   long_description_content_type="text/markdown",
@@ -65,7 +114,6 @@ setuptools.setup(
   python_requires=(
       '>=3.9, '
   ),
-  # package_dir={
-  #     'kagemeka': 'src'
-  # },
+  extras_require=extras,
+
 )

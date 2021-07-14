@@ -4,4 +4,4 @@ python3 setup.py \
 
 twine upload dist/*
 
-sudo rm -r dist/*
+rm -r dist/*
