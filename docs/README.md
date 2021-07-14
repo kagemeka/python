@@ -1,10 +1,3 @@
-# モデルについて
-
-基本的に、モデルやweightsはgitにあげていない。
-ほとんどはプログラムで自動的にネットからダウンロードするが、
-object_trackingのdeep_sortのようにモデルを手動でダウンロードする必要がある場合もある。
-
-
 ### build pkg 
 ```sh
 python3 setup.py \
@@ -19,20 +12,7 @@ twine upload dist/*
 ```
 
 
-### pkg 整理
-- [x] cp
-- [ ] ds
-  - [ ] processing
-  - [ ] ml
-- [x] dsa
-- [x] gen
-- [x] rpa
-- [x] samples 
-- [x] txn
-
-
-## shapについて
-tensorflow2でエラーが出た時のtips
+## shap
 ```py3
 import tensorflow as tf 
 
