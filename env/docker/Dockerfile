@@ -10,6 +10,7 @@ RUN \
   && apt install -yq=2 \
   apt-utils \
   neovim \
+  wget \
   software-properties-common \
   && rm -rf /var/lib/apt/lists/* \
   && apt clean -y \
