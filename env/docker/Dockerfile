@@ -27,6 +27,7 @@ RUN \
   python$PYVER \
   python$PYVER-dev \
   python$PYVER-distutils \
+  python$PYVER-tk \
   && ln -fns \
   /usr/bin/python$PYVER \
   /usr/bin/python3 \
