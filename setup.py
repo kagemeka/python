@@ -9,7 +9,9 @@ import os
 cfd = os.path.dirname(__file__)
 cfd = os.path.abspath(cfd)
 
-req = f'{cfd}/requirements.txt'
+# req = f'{cfd}/requirements.txt'
+
+req = 'requirements.txt'
 
 with open(req, mode='r') as f:
     ls = f.readlines()
