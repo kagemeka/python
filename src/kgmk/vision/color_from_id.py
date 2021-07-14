@@ -49,8 +49,3 @@ class ColorFromId:
       for x in p 
     )
     return color 
-
-
-fn = ColorFromId()
-c = fn(1)
-print(c)

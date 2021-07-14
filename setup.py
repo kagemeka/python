@@ -1,4 +1,4 @@
-version = '0.1.6'
+version = '0.1.7'
 
 import typing
 import pathlib
@@ -99,8 +99,6 @@ setuptools.setup(
   license="MIT",
   classifiers=[
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Operating System :: POSIX :: Linux",
@@ -110,6 +108,9 @@ setuptools.setup(
   },
   packages=find_packages(
     where='./src/',
+    exclude=[
+      '*tests*',
+    ],
   ),
   include_package_data=True,
   install_requires=reqs,
