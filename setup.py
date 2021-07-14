@@ -26,7 +26,7 @@ with open(req, mode='r') as f:
 
 setuptools.setup(
     name="kagemeka",
-    version="0.0.16",
+    version="0.1.1",
     description="",
     long_description="",
     long_description_content_type="text/markdown",
