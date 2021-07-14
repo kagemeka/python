@@ -1,34 +1,30 @@
+import typing
 from typing import (
   List,
+  Optional,
 )
-
-
-from dataclasses import (
-  dataclass,
-)
+import dataclasses
 
 
 
-@dataclass
+@dataclasses.dataclass
 class Node:
-  id_: int = None
+  id_: Optional[int] = None
 
 
 
-@dataclass
+@dataclasses.dataclass 
 class Edge:
-  id_: int = None
-  from_ : int = ...
-  to: int = ...
+  id_: Optional[int] = None
+  from_ : int = ... 
+  to: int = ... 
   weight: int = 1
   capacity: int = 0
 
 
 
-@dataclass
+@dataclasses.dataclass
 class Graph:
-
-
   nodes: List[Node]
   edges: List[List[Edge]]
 
@@ -36,7 +32,7 @@ class Graph:
   def __init__(
     self,
     n: int,
-  ):
+  ) -> typing.NoReturn:
     nodes = [
       Node(i)
       for i in range(n)
@@ -51,19 +47,22 @@ class Graph:
   def add_edge(
     self,
     e: Edge,
-  ):
+  ) -> typing.NoReturn:
     i = e.from_ 
     self.edges[i].append(e)
   
 
   def add_edges(
     self,
-    edges: List[Edge],
-  ):
+    edges: typing.List[Edge],
+  ) -> typing.NoReturn:
     for e in edges:
       self.add_edge(e)
   
 
   @property 
-  def size(self):
+  def size(
+    self,
+  ) -> int:
     return len(self.nodes)
+
