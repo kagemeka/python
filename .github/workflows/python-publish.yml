@@ -20,8 +20,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install build
     - name: Build package
-      # run: python -m build
-      run: python3 setup.py sdist bdist_wheel
+      run: python -m build
+      # run: python3 setup.py sdist bdist_wheel
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
