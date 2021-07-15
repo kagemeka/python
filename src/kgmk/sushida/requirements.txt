@@ -3,7 +3,7 @@ numpy==1.21.0
 Pillow==8.3.1
 pyautogui==0.9.52
 pytesseract==0.3.7
-python-xlib==0.30
+python-xlib
 PyYAML==5.4.1
 requests==2.25.1
 selenium==3.141.0
