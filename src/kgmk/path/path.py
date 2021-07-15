@@ -10,16 +10,16 @@ class Path():
   def __call__(
     self,
   ) -> str:
-    return os.path.abspath(
-      self.__path,
-    )
+    return repr(self)
   
 
   def __repr__(
     self,
   ) -> str:
-    return self()
-  
+    return os.path.abspath(
+      self.__path,
+    )
+    
 
   @property
   def base(
