@@ -10,6 +10,7 @@ RUN \
   && apt install -yq=2 \
   apt-utils \
   neovim \
+  wget \
   software-properties-common \
   && rm -rf /var/lib/apt/lists/* \
   && apt clean -y \
@@ -27,6 +28,7 @@ RUN \
   python$PYVER \
   python$PYVER-dev \
   python$PYVER-distutils \
+  python$PYVER-tk \
   && ln -fns \
   /usr/bin/python$PYVER \
   /usr/bin/python3 \

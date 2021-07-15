@@ -16,11 +16,11 @@ services:
     restart: on-failure
     tty: true
     volumes:
-      - type: tmpfs
-        target: /tmp/
-        volume: 
-          nocopy: true
-        read_only: false
+      # - type: tmpfs
+      #   target: /tmp/
+      #   volume: 
+      #     nocopy: true
+      #   read_only: false
       - type: bind
         source: /tmp/.X11-unix
         target: /tmp/.X11-unix
