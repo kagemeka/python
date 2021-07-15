@@ -25,8 +25,8 @@ def create_driver():
 
 def main():
   auth = Auth(
-    'kagemeka1@gmail.com',
-    'ruruth12',
+    '',
+    '',
   )
   play_cfg = PlayCfg(
     interval=3.0,
