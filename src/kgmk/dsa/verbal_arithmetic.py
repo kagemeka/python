@@ -12,17 +12,22 @@ class VerbalArithmetic():
     self,
     words: typing.List[str],
     result: typing.List[str],
-    zero_ok: bool = True,
   ) -> typing.List[
     typing.Dict[str, int],
   ]:
     s = words 
     s.append(result)
     self.__s = s
-    self.__zero_ok = zero_ok
     self.__preprocess()
     self.__search()
     return self.__res
+
+
+  def __init__(
+    self,
+    zero_ok: bool = True,
+  ) -> typing.NoReturn:
+    self.__zero_ok = zero_ok
 
 
   def __preprocess(
