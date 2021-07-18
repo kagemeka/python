@@ -1,5 +1,6 @@
 import numpy as np 
 import numba as nb
+import typing
 
 
 @nb.njit
@@ -9,7 +10,8 @@ def combinations(
 ) -> np.array:
   a = np.arange(n)
   ls = []
-  if r < 0 or r > n: return np.array(ls)
+  if r < 0 or r > n: 
+    return np.array(ls)
   rng = np.arange(r)[::-1]
   i = np.arange(r)
   ls.append(list(a[:r]))

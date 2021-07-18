@@ -12,4 +12,4 @@ class Combinations():
     )
     a = range(n)
     c = combinations(a, r)
-    return np.array((*c,))
+    return np.array((*c, ))

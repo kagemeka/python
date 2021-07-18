@@ -8,12 +8,15 @@ class Permutations():
     a: typing.Iterable[
       typing.Any,
     ],
-    r: int,
+    r: typing.Optional[
+      int
+    ] = None,
   ) -> typing.AsyncIterator[
     typing.Tuple[typing.Any],
   ]:
     a = tuple(a)
     n = len(a)
+    if r is None: r = n 
     if r < 0 or r > n: return
     rng = range(r)
     i = list(range(n))
