@@ -149,27 +149,3 @@ class NChooseMod(ChooseMod):
     self.nchoose = self.cumprod(
       self.nchoose,
     ) * self.inv_fact % p
-
-
-def permutations( 
-  a, 
-  r=None, 
-  i=0,
-):
-  a = list(a)
-  n = len(a)
-  if r is None:
-    r = n
-  if i == r: 
-    yield tuple(a[:r])
-    return 
-  for j in range(i, n): 
-    a[i], a[j] = a[j], a[i]
-    perms = permutations(
-      a, 
-      r, 
-      i + 1,
-    )
-    for p in perms:
-      yield p 
-  return
