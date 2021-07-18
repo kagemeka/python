@@ -1,6 +1,8 @@
-from .with_nxt_cmb import (
+from ...next_combination \
+import(
   NextCombination,
 )
+
 
 
 # TODO cut below

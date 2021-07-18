@@ -6,7 +6,6 @@ import (
 # TODO cut below
 
 
-import numpy as np
 import typing
 
 
