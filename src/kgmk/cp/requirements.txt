@@ -1,1 +1,5 @@
 kagemeka[dsa]
+networkx
+numba
+numpy 
+scipy
