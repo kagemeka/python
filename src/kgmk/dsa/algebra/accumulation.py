@@ -1,32 +1,20 @@
-from operator import xor, or_
+import functools
+import typing
 
-from functools import reduce
 
 
-from typing import (
-  Iterable,
-)
-
-class Accumulation:
+class Accumulate:
   @staticmethod 
-  def cummulative(
-    function,
-    identity,
+  def __call__(
+    func: typing.Callable,
+    identity: int,
   ):
-    def f(sequence: Iterable):
-      return reduce(
-        function,
-        sequence,
-        identity, 
+    def fn(
+      a: typing.Iterable[int],
+    ) -> int:
+      return functools.reduce(
+        func,
+        a,
+        identity,
       )
-    
-    return f
-
-
-
-xor = Accumulation.cummulative(
-  xor, 0,
-)
-or_ = Accumulation.cummulative(
-  or_, 0,
-)
+    return fn
