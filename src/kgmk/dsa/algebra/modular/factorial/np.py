@@ -1,29 +1,46 @@
-  def factorial(
+import typing
+import numpy as np
+
+
+
+class ModFactorial:
+  def __call__(
     self, 
-  ):
-    n = self.value
-    fact = [
-      self.__class__(i)
-      for i in range(n)
-    ]
-    fact = np.array(fact)
-    e = self.mul_identity()
-    fact[0] = e
-    fact.cumprod(out=fact)
-    return fact
+    n: int = 1 << 20,
+  ) -> np.array:
+    a = np.arange(n); a[0] = 1
+    return self.__cumprod(a)
+
+
+  def __cumprod(self, a):
+    m = self.__mod
+    l = len(a)
+    n = int(np.sqrt(l) + 1)
+    a = np.resize(a, (n, n))
+    for i in range(n-1):
+      a[:, i + 1] *= a[:, i]
+      a[:, i + 1] %= m
+    for i in range(n-1):
+      a[i + 1] *= a[i, -1]
+      a[i + 1] %= m
+    return np.ravel(a)[:l]
+
+
+  def __init__(
+    self,
+    modulo: int,
+  ) -> typing.NoReturn:
+    self.__mod = modulo 
   
 
-  def inv_factorial(
-    self,
-  ): 
-    fact = self.factorial()
-    n = self.value
-    ifact = np.arange(
-      1, 
-      n + 1,
-    ).astype(object)
-    ifact[-1] = fact[-1].inv()
-    ifact[::-1].cumprod(
-      out=ifact[::-1],
-    )
-    return ifact
+  def inv(
+    self, 
+    n: int = 1 << 20,
+  ) -> np.array:
+    a = np.arange(1, n + 1)
+    m = self.__mod
+    x = int(self(n)[-1])
+    a[-1] = pow(x, m - 2, m)
+    return self.__cumprod(
+      a[::-1],
+    )[n::-1]
