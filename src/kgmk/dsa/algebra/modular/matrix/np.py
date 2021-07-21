@@ -35,6 +35,15 @@ class ModMatrix():
     c += c1 << N
     c += c2 << N * 2
     return c % m
+    '''
+    This method is faster than 
+      c = (
+        a[:, None, :] 
+        * b[None, ...]
+      ) % mod
+      c = c.sum(axis=-1) % mod 
+      return c
+    '''
 
 
   def pow(
