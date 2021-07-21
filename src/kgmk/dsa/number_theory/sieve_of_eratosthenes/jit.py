@@ -1,17 +1,42 @@
 import numpy as np 
-import typing
 import numba as nb
+
+
+@nb.njit
+def lpf(
+  n: int = 1 << 20,
+) -> np.array:
+  s = np.arange(n)
+  s[:2] = -1
+  i = 0
+  while i * i < n:
+    i += 1
+    if s[i] != i: continue
+    s[i * 2::i] = i
+  return s
+  
+  
+@nb.njit
+def spf(
+  n: int = 1 << 20,
+) -> np.array:
+  s = np.arange(n)
+  s[:2] = -1
+  i = 0
+  while i * i < n:
+    i += 1
+    if s[i] != i: continue
+    for j in range(
+      i * 2,
+      n,
+      i,
+    ):
+      if s[j] == j: s[j] = i
+  return s
 
 
 @nb.njit
 def sieve_of_eratosthenes(
   n: int = 1 << 20,
 ) -> np.array:
-  s = np.ones(n, np.bool8)
-  s[:2] = 0
-  i = 0 
-  while i * i < n:
-    i += 1
-    if not s[i]: continue
-    s[i * 2::i] = 0
-  return s
+  return lpf(n) == np.arange(n)

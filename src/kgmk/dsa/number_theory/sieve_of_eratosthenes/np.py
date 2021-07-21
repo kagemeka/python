@@ -1,5 +1,4 @@
 import numpy as np 
-import typing
 
 
 
@@ -14,7 +13,7 @@ class SieveOfEratosthenes():
 
   def spf(
     self,
-    n: int,
+    n: int = 1 << 20,
   ) -> np.array:
     s = np.arange(n)
     s[:2] = -1
