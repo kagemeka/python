@@ -1,8 +1,5 @@
-# from .algebra import Modular
-
 from functools import lru_cache
 from typing import (
-  overload, 
   Union, 
   Iterable, 
   Tuple, 
