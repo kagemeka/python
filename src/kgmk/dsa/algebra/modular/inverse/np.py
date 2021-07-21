@@ -1,7 +1,4 @@
-from \
-  kgmk.dsa.algebra.modular \
-  .factorial.np \
-import (
+from ..factorial.np import (
   ModFactorial,
 )
 
