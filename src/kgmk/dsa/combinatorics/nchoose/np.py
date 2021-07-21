@@ -1,15 +1,15 @@
 from \
   ...algebra.modular \
-  .factorial \
+  .factorial.np \
 import (
   ModFactorial,
 )
+  
 
-# TODO cut below
 
 
 import typing
-
+import numpy as np
 
 
 class NChoose():
@@ -35,18 +35,15 @@ class NChoose():
   ) -> typing.NoReturn:
     r, m = rmax, modulo
     fn = ModFactorial(m)
-    a = list(range(
+    a = np.arange(
       n + 1,
       n - r,
       -1,
-    )); a[0] = 1
-    fn.cumprod(a)
-    b = fn.inv(r + 1)
-    for i in range(rmax + 1):
-      a[i] *= b[i]
-      a[i] %= m
-    self.__a = a
+    ); a[0] = 1
+    a = fn.cumprod(a)
+    a *= fn.inv(r + 1)
+    self.__a = a % m
   
 
   def __len__(self) -> int:
-    return len(self.__a)
+    return self.__a.size

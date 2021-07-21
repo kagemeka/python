@@ -9,11 +9,11 @@ class ModFactorial():
   ) -> typing.List[int]:
     a = list(range(n))
     a[0] = 1
-    self.__cumprod(a)
+    self.cumprod(a)
     return a
 
 
-  def __cumprod(
+  def cumprod(
     self,
     a: typing.List[int],
   ) -> typing.NoReturn:
@@ -39,5 +39,5 @@ class ModFactorial():
     x = pow(b[-1], m - 2, m)
     a[-1] = x
     a.reverse()
-    self.__cumprod(a)
+    self.cumprod(a)
     return a[::-1]

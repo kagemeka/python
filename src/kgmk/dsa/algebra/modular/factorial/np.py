@@ -9,10 +9,13 @@ class ModFactorial:
     n: int = 1 << 20,
   ) -> np.array:
     a = np.arange(n); a[0] = 1
-    return self.__cumprod(a)
+    return self.cumprod(a)
 
 
-  def __cumprod(self, a):
+  def cumprod(
+    self, 
+    a: np.array,
+  ) -> np.array:
     m = self.__mod
     l = len(a)
     n = int(np.sqrt(l) + 1)
@@ -41,6 +44,6 @@ class ModFactorial:
     m = self.__mod
     x = int(self(n)[-1])
     a[-1] = pow(x, m - 2, m)
-    return self.__cumprod(
+    return self.cumprod(
       a[::-1],
     )[n::-1]
