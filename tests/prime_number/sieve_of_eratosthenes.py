@@ -9,10 +9,12 @@ import (
 
 def test():
   fn = SieveOfEratosthenes()
-  a = fn(100)
-  print(a)
-  a = fn.spf(100)
-  print(a)
+  a = fn(1000000)
+  print(a[-5:])
+  a = fn.spf(10000)
+  print(a[-5:])
+  a = fn.lpf(10000)
+  print(a[-5:])
 
 
 

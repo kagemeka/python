@@ -35,10 +35,9 @@ class SieveOfEratosthenes():
     while i * i < n:
       i += 1
       if s[i] != i: continue
-      for j in range(
-        i * 2,
-        n,
+      np.minimum(
+        s[i * 2::i],
         i,
-      ):
-        if s[j] == j: s[j] = i
+        out=s[i * 2::i],
+      )
     return s
