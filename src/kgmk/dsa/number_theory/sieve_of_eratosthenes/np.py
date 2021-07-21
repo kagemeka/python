@@ -7,8 +7,22 @@ class SieveOfEratosthenes():
     self,
     n: int = 1 << 20,
   ) -> np.array:
-    s = self.spf(n)
+    s = self.lpf(n)
     return s == np.arange(n)
+  
+
+  def lpf(
+    self,
+    n: int = 1 << 20,
+  ) -> np.array:
+    s = np.arange(n)
+    s[:2] = -1
+    i = 0
+    while i * i < n:
+      i += 1
+      if s[i] != i: continue
+      s[i * 2::i] = i
+    return s
   
 
   def spf(
@@ -21,5 +35,10 @@ class SieveOfEratosthenes():
     while i * i < n:
       i += 1
       if s[i] != i: continue
-      s[i * 2::i] = i
+      for j in range(
+        i * 2,
+        n,
+        i,
+      ):
+        if s[j] == j: s[j] = i
     return s
