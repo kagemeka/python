@@ -5,4 +5,5 @@ core
 __pycache__
 /build/
 /dist/
+*.so
 !.gitkeep
