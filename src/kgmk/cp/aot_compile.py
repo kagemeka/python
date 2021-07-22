@@ -38,13 +38,10 @@ def main() -> typing.NoReturn:
 # TODO cut below
 
 
-import sys
-
-if (
-  sys.argv[-1] 
-  == 'ONLINE_JUDGE'
-):
+def aot_compile(
+) -> typing.NoReturn:
   '''TODO'''
+  global foo
   from numba import njit, i8
   foo = njit(foo)
   fn = solve 
@@ -58,6 +55,14 @@ if (
     signature,
   )(fn)
   cc.compile()
+
+
+import sys
+if (
+  sys.argv[-1] 
+  == 'ONLINE_JUDGE'
+): 
+  aot_compile()
   exit(0)
 
 
