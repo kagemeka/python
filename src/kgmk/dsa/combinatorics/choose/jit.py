@@ -5,6 +5,8 @@ ifact: np.array
 
 # this function cannot used via importing.
 # it's need to copy and paste it into other sources.
+# each n, r must be a single integer.
+
 # TODO cut below
 
 
