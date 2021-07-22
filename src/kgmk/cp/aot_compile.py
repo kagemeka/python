@@ -19,6 +19,14 @@ def solve(
   ...
   a = np.arange(10)
   foo(a)
+
+  # It's not supported
+  # to specify the signature
+  # of closures.
+  def bar(n): 
+    print(n)
+  
+  bar(n)
   ...
 
 
