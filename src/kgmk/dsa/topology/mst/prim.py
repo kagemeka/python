@@ -1,6 +1,4 @@
-from . import (
-  MinimamSpanningTree,
-)
+
 
 from .. import (
   Graph,
@@ -12,9 +10,8 @@ from heapq import (
   heappop,
 )
 
-class PrimMST(
-  MinimamSpanningTree,
-):
+
+class Prim():
 
   def __init__(
     self,

@@ -1,25 +1,13 @@
-from . import (
-  MinimamSpanningTree,
-)
-
 from .. import (
   Graph,
   DisjointSet as UnionFind,
 )
 
-class KruskalMST(
-  MinimamSpanningTree,
-):
+class Kruskal():
 
   def __init__(
     self,
-    *args,
-    **kwargs,
   ):
-    super().__init__(
-      *args,
-      **kwargs,
-    )
     self._sorted_edges = None
 
 

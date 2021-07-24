@@ -11,3 +11,17 @@ from .prim import (
 from .boruvka import (
   BoruvkaMST,
 )
+
+
+from .. import (
+  Graph, 
+  DisjointSet as UnionFind,
+)
+
+class MinimamSpanningTree(
+  Graph,
+):
+  ...
+
+
+

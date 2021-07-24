@@ -1,16 +1,10 @@
-from . import (
-  MinimamSpanningTree,
-)
-
 from .. import (
   Graph,
   DisjointSet as UnionFind,
 )
 
 
-class BoruvkaMST(
-  MinimamSpanningTree,
-):
+class Boruvka():
 
   def __init__(
     self,

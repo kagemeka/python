@@ -4,7 +4,7 @@ The inversion count of an array is the count of processes in merge-sorting it.
 the array should be compressed before calculating the inversion count.
 in other words, elments of the array are between 0 and n - 1, here, n is the length of it.
 '''
-from .fenwick_tree import (
+from .fenwick import (
   FenwickTree,
 )
 from .compress_array import (

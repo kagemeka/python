@@ -18,10 +18,11 @@ import (
 
 def test():
   mod = 10 ** 9 + 7
-  mint = ModFactory(mod)
-  a = mint(-1)
+  Mint = ModFactory()(mod)
+  # mint = ModFactory(mod)
+  a = Mint(-1)
   print(a)
-  b = mint(-3)
+  b = Mint(-3)
   a += b
   print(a)
   c = 1
@@ -34,7 +35,7 @@ def test():
   e = d 
   e += 1
   print(e, d)
-  print(mint(2) ** -1)
+  print(Mint(2) ** -1)
   print(2 ** b)
 
   fn = ModFactorial(mod)
