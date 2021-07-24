@@ -1,3 +1,5 @@
+
+
 from __future__ import (
   annotations,
 )
@@ -5,48 +7,39 @@ from __future__ import (
 
 
 import typing
+import abc 
 
 
-
-@typing.final
-class Modular():
+class Modular(abc.ABC):
+  
+  mod: int
 
   def __init__(
     self,
     value: int,
-    modulo: int,
   ) -> typing.Noreturn:
+    value %= self.mod
     self.__value = value
-    self.__mod = modulo
-    self.__value %= self.mod
 
-
-  @property
-  def mod(self) -> int:
-    return self.__mod
-  
 
   def __repr__(self) -> str:
     return f'{self.__value}'
   
   
   def __clone(self) -> Modular:
-    return Modular(
+    return self.__class__(
       self.__value,
-      self.__mod,
     )
 
 
+  @classmethod
   def __to_mod(
-    self, 
+    cls, 
     rhs: T,
   ) -> Modular:
     if type(rhs) != int:
-      return rhs 
-    return Modular(
-      rhs, 
-      self.mod,
-    )
+      return rhs
+    return cls(rhs)
 
 
   def __add__(
@@ -75,9 +68,8 @@ class Modular():
   
 
   def __neg__(self) -> Modular:
-    return Modular(
+    return self.__class__(
       -self.__value,
-      self.mod,
     )
 
 
@@ -146,7 +138,7 @@ class Modular():
     self,   
     lhs: T,
   ) -> Modular:
-    return self.inv() * rhs 
+    return self.inv() * lhs
 
 
   def __pow__(
@@ -175,11 +167,19 @@ class Modular():
     return rhs ** self.__value
 
 
+  @classmethod
   def mul_identity(
-    self,
+    cls,
   ) -> Modular:
-    return Modular(1, self.mod)
-
+    return cls(1)
+  
+  
+  @classmethod
+  def add_identity(
+    cls,
+  ) -> Modular:
+    return cls(0)
+  
     
   def inv(self) -> Modular:
     i = self ** (self.mod - 2)

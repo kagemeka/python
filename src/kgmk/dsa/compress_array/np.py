@@ -10,6 +10,7 @@ class CompressArray():
   ) -> int:
     return self.__v[i]
   
+  
   def __call__(
     self,
     a: np.array,

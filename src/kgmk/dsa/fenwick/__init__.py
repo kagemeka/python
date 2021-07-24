@@ -8,6 +8,8 @@
 Here, 'inv' means bits world inverse operation.
 
 Fenwick Tree is also known as BIT(Binary Indexed Tree).
+
+default is 1-indexed.
 '''
 # TODO cut below
 
@@ -16,12 +18,13 @@ Fenwick Tree is also known as BIT(Binary Indexed Tree).
 import typing
 
 
+
 class FenwickTree():
   def __init__(
     self,
     n: int,
   ) -> typing.NoReturn:
-    self.__buf = [0] * (n + 1)
+    self.__a = [0] * (n + 1)
   
 
   def add(
@@ -29,10 +32,9 @@ class FenwickTree():
     i: int,
     x: int,
   ) -> typing.NoReturn:
-    b = self.__buf
-    n = len(b)
+    a = self.__a; n = len(a)
     while i < n:
-      b[i] += x
+      a[i] += x
       i += i & -i
   
 
@@ -40,9 +42,8 @@ class FenwickTree():
     self,
     i: int,
   ) -> int:
-    b = self.__buf
     s = 0 
     while i > 0:
-      s += b[i]
+      s += self.__a[i]
       i -= i & -i
     return s
