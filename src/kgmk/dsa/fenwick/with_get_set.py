@@ -1,15 +1,16 @@
 import typing
 
 
-class FenwickTree():
+
+class Fenwick():
   def __init__(
     self,
     n: int,
   ) -> typing.NoReturn:
-    self.__a = [0] * n
+    self.__a = [0] * (n + 1)
   
 
-  def add(
+  def __setitem__(
     self,
     i: int,
     x: int,
@@ -17,16 +18,15 @@ class FenwickTree():
     a = self.__a
     while i < len(a):
       a[i] += x
-      i |= i + 1
+      i += i & -i
 
 
-  def sum(
+  def __getitem__(
     self,
     i: int,
   ) -> int:
     s = 0 
-    while i >= 0:
+    while i > 0:
       s += self.__a[i]
-      i &= i + 1
-      i -= 1
+      i -= i & -i
     return s

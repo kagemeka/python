@@ -1,7 +1,7 @@
 import typing
 
 
-class FenwickTree():
+class Fenwick():
   def __init__(
     self,
     n: int,
@@ -9,7 +9,7 @@ class FenwickTree():
     self.__a = [0] * n
   
 
-  def add(
+  def __setitem__(
     self,
     i: int,
     x: int,
@@ -20,7 +20,7 @@ class FenwickTree():
       i |= i + 1
 
 
-  def sum(
+  def __getitem__(
     self,
     i: int,
   ) -> int:
