@@ -34,4 +34,8 @@ class Inverse():
     fn = ModFactorial(m)
     a = fn.inv(n)
     a[1:] *= fn(n - 1)
-    self.__a = a % m
+    self.__a = a % m 
+
+  
+  def __repr__(self) -> str:
+    return str(self.__a)

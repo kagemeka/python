@@ -58,10 +58,8 @@ def aot_compile(
 
 
 import sys
-if (
-  sys.argv[-1] 
-  == 'ONLINE_JUDGE'
-): 
+OJ = 'ONLINE_JUDGE'
+if sys.argv[-1] == OJ: 
   aot_compile()
   exit(0)
 
