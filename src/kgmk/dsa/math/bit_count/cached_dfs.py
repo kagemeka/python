@@ -2,8 +2,7 @@ import typing
 
 
 
-class BitCnt():
-  
+class BitCount():
   def __call__(
     self,
     n: int,
