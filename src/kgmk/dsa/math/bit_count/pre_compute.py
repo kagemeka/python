@@ -2,13 +2,14 @@ import typing
 
 
 
-class BitCnt():
+class BitCount():
   def __getitem__(
     self,
     n: int,
   ) -> int:
     return self.__a[n]
   
+
   def __call__(
     self,
     n: int,

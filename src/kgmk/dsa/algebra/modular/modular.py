@@ -1,10 +1,6 @@
-
-
 from __future__ import (
   annotations,
 )
-# TODO cut below
-
 
 import typing
 import abc 
@@ -139,6 +135,27 @@ class Modular(abc.ABC):
     lhs: T,
   ) -> Modular:
     return self.inv() * lhs
+
+
+  def __floordiv__(
+    self, 
+    rhs: T,
+  ) -> Modular:
+    return self / rhs
+
+
+  def __ifloordiv__(
+    self,
+    rhs: T,
+  ) -> Modular:
+    return self // rhs
+
+
+  def __rfloordiv__(
+    self,   
+    lhs: T,
+  ) -> Modular:
+    return lhs / self
 
 
   def __pow__(
