@@ -3,9 +3,7 @@ import numba as nb
 
 
 
-@nb.njit(
-  cache=True,
-)
+@nb.njit
 def find_divisors(
   n: int,
 ) -> np.array:
