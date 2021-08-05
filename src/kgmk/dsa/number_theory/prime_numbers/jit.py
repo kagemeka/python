@@ -14,5 +14,5 @@ import numba as nb
 def prime_numbers(
   n: int = 1 << 20,
 ) -> np.array:
-  a = sieve_of_eratosthenes(n)
-  return np.flatnonzero(a)
+  s = sieve_of_eratosthenes(n)
+  return np.flatnonzero(s)
