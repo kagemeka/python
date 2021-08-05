@@ -147,3 +147,5 @@
 # xlrd==1.2.0
 # XlsxWriter
 # youtube-dl
+# xmltodict
+# untangle

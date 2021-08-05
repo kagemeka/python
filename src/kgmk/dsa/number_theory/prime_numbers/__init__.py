@@ -12,7 +12,7 @@ class PrimeNumbers():
   def __getitem__(
     self,
     i: int,
-  ):
+  ) -> int:
     return self.__a[i] 
 
 
@@ -28,9 +28,11 @@ class PrimeNumbers():
     )
 
 
-  def __iter__(self):
+  def __iter__(
+    self,
+  ) -> typing.Iterator[int]:
     return iter(self.__a)
 
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     return f'{self.__a}'

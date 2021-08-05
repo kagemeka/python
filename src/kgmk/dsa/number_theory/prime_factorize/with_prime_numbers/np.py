@@ -1,4 +1,4 @@
-from ..prime_numbers.np \
+from ...prime_numbers.np \
 import (
   PrimeNumbers,
 )

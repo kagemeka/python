@@ -34,7 +34,5 @@ class PrimeNumbers():
     return iter(self.__a)
 
 
-  def __repr__(
-    self,
-  ) -> str:
+  def __repr__(self) -> str:
     return f'{self.__a}'
