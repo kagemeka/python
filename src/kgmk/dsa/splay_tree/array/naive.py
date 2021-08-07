@@ -1,7 +1,6 @@
 from __future__ import (
   annotations,
 )
-
 import typing 
 from typing import (
   Optional,
@@ -25,6 +24,7 @@ class Node():
   right: Optional[Node] = None
   value: Optional[int] = None
   size: int = 1
+  mn: int = 1 << 50
 
 
   def rotate(
@@ -32,7 +32,6 @@ class Node():
   ) -> typing.NoReturn:
     p = self.parent
     pp = p.parent
-
     if pp and pp.left is p:
       pp.left = self 
     if pp and pp.right is p:
@@ -48,8 +47,8 @@ class Node():
       p.right = c
       self.left = p
     if c: c.parent = p
-    p.parent = self
 
+    p.parent = self
     p.update()
     self.update()
   
@@ -87,21 +86,30 @@ class Node():
     self,
   ) -> typing.NoReturn:
     s = 1 
-    if self.left is not None:
+    m = self.value
+    if self.left:
+      m = min(m, self.left.mn)
       s += self.left.size
-    if self.right is not None:
+    if self.right:
+      m = min(m, self.right.mn)
       s += self.right.size
     self.size = s
+    self.mn = m
 
 
 
-class SplayTree():  
+@dataclasses.dataclass
+class SplayArray():
+  root: typing.Optional[
+    Node
+  ] = None
 
-  def __getitem__(
+
+  def __get(
     self,
     i: int,
-  ) -> int:
-    u = self.__root
+  ) -> Node:
+    u = self.root
     while 1:
       j = (
         u.left.size if u.left 
@@ -115,8 +123,15 @@ class SplayTree():
         i -= j + 1
         continue
       u.splay()
-      self.__root = u
-      return u.value
+      self.root = u
+      return u
+
+
+  def __getitem__(
+    self,
+    i: int,
+  ) -> int:
+    return self.__get(i).value
 
 
   def __setitem__(
@@ -124,32 +139,16 @@ class SplayTree():
     i: int,
     x: int,
   ) -> typing.NoReturn:
-    u = self.__root
-    while 1:
-      j = (
-        u.left.size if u.left 
-        else 0
-      )
-      if i < j:
-        u = u.left
-        continue
-      if i < j:
-        u = u.left
-        continue
-      if i > j:
-        u = u.right
-        i -= j + 1
-        continue
-      u.splay()
-      u.value = x 
-      self.__root = u
-      return
+    u = self.__get(i)
+    u.value = x
+    u.update()
   
 
-  def __init__(
-    self,
+  @classmethod
+  def from_size(
+    cls,
     n: int,
-  ) -> typing.NoReturn:
+  ) -> SplayArray:
     a = [
       Node() for _ in range(n)
     ]
@@ -157,25 +156,67 @@ class SplayTree():
       a[i].parent = a[i + 1]
       a[i + 1].left = a[i]
       a[i + 1].update()
-    self.__a = a
-    self.__root = a[-1]
+    return cls(a[-1])
 
 
+  def join(
+    self,
+    rhs: SplayArray,
+  ) -> typing.NoReturn:
+    u = self.root
+    v = rhs.root
+    if not u:
+      self.root = v
+      return 
+    if not v: return
+    u = self.__get(u.size - 1)
+    u.right = v
+    v.parent = u
+    u.update()
+    self.root = u
+  
+
+  def split(
+    self,
+    i: int,
+  ) -> SplayArray:
+    u = self.root
+    if i == 0:
+      rhs = SplayArray(u)
+      self.root = None
+      return rhs
+    if i == u.size:
+      return SplayArray(None)
+    v = self.__get(i)
+    u = v.left
+    v.left = None
+    u.parent = None
+    v.update()
+    self.root = u
+    return SplayArray(v)
 
 
-def test() -> typing.NoReturn:
-  n = 1 << 18
-  st = SplayTree(n)
-  st[0] = 100
+  def insert(
+    self,
+    i: int,
+    v: int,
+  ) -> typing.NoReturn:
+    rhs = self.split(i)
+    v = Node(value=v)
+    v.update()
+    self.join(SplayArray(v))
+    self.join(rhs)
+  
 
-  print(st[0], st[1])
-  print(st[0], st[1])
-  print(st[0] == st[0])
-  print(st[1] is st[2])
-  print(st[0])
-  print(st[1])
-  print(st[2])
-
-
-if __name__ == '__main__':
-  test()
+  def delete(
+    self,
+    i: int,
+  ) -> typing.NoReturn:
+    u = self.__get(i)
+    v = u.right
+    u = u.left
+    if u: u.parent = None 
+    if v: v.parent = None
+    self.root = u
+    self.join(SplayArray(v))
+  
