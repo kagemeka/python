@@ -28,8 +28,7 @@ class Heap():
     a.append(x)
     while i > 0:
       j = (i - 1) // 2
-      if a[i] >= a[j]:
-        break 
+      if a[i] >= a[j]: break
       self.__swap(i, j)
       i = j
     
@@ -43,15 +42,16 @@ class Heap():
     i = 0 
     while 1:
       j = i * 2 + 1
-      if j >= len(a) - 1:
-        break
-      if a[j + 1] < a[j]:
-        j += 1
-      if a[i] <= a[j]:
-        break 
+      if j >= len(a): break
+      j += (
+        j < len(a) - 1 and
+        a[j + 1] < a[j]
+      )
+      if a[i] <= a[j]: break
       self.__swap(i, j)
       i = j
     return x
+
 
   def __repr__(self) -> str:
     return str(self.__a)
