@@ -149,3 +149,5 @@
 # youtube-dl
 # xmltodict
 # untangle
+# uwsgi
+# gunicorn
