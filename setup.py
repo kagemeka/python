@@ -1,4 +1,4 @@
-version = '0.1.18'
+version = '0.1.19'
 
 import typing
 import pathlib
