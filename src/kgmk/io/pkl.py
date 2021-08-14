@@ -8,17 +8,7 @@ from typing import (
   Any,
 )
 
-'''TODO 
-dump前には
-assert pkl
-prepare_dir
 
-load前には
-assert pkl
-
-を行うようにする。
-
-'''
 
 class Pkl:
 
