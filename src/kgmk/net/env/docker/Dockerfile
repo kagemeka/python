@@ -1,0 +1,4 @@
+
+
+apt install -y \
+  netcat

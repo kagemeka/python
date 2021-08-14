@@ -16,9 +16,8 @@ def find(
   u: int,
 ) -> int:
   if a[u] < 0: return u
-  pu = find(a, a[u])
-  a[u] = pu
-  return pu
+  a[u] = find(a, a[u])
+  return a[u]
 
 
 @nb.njit

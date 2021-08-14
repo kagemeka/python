@@ -9,19 +9,16 @@ class UnionFind():
   ) -> typing.NoReturn: 
     self.__p = list(range(n))
     self.__s = [1] * n
-    self.__r = [0] * n
   
 
   def find(
     self, 
     u: int,
   ) -> int:
-    p = self.__p 
-    pu = p[u]
-    if pu == u: return u 
-    pu = self.find(pu)
-    p[u] = pu
-    return pu
+    p = self.__p
+    if p[u] == u: return u
+    p[u] = self.find(p[u])
+    return p[u]
 
 
   def unite(
@@ -36,13 +33,3 @@ class UnionFind():
     if s[u] < s[v]: u, v = v, u
     s[u] += s[v]
     p[v] = u
-  
-
-  def same(
-    self,
-    u: int,
-    v: int,
-  ) -> bool:
-    u = self.find(u)
-    v = self.find(v)
-    return u == v
