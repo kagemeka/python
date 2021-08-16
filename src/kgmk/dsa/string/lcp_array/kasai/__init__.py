@@ -16,10 +16,10 @@ class Kasai():
     for i in range(n):
       if l > 0: l -= 1
       r = rank[i]
-      if r == 0: continue
-      j = sa[r - 1]
+      if r == n - 1: continue
+      j = sa[r + 1]
       while i + l < n and j + l < n:
         if a[i + l] != a[j + l]: break
         l += 1
-      h[r] = l
+      h[r + 1] = l
     return h

@@ -9,10 +9,8 @@ def z_algorithm(s):
         a[i - l], 
         r - i,
       )
-    while (
-      i + a[i] < n 
-      and s[i+a[i]] == s[a[i]]
-    ): a[i] += 1
+    while i + a[i] < n and s[i + a[i]] == s[a[i]]: 
+      a[i] += 1
     if i + a[i] >= r: 
       l, r = i, i + a[i]
   return a
