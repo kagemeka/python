@@ -12,7 +12,7 @@ services:
     env_file:
       - common.env 
     image: kagemeka/kagemeka:py
-    runtime: nvidia
+    # runtime: nvidia
     restart: on-failure
     tty: true
     volumes:
