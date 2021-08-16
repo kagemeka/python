@@ -1,4 +1,6 @@
 import typing 
+import sys
+sys.setrecursionlimit(1 << 20)
 
 
 
@@ -19,6 +21,31 @@ class UnionFind():
     if p[u] == u: return u
     p[u] = self.find(p[u])
     return p[u]
+
+
+  def groups(self) -> typing.List[
+    typing.List[int]
+  ]:
+    n = len(self.__p)
+    g = [[] for _ in range(n)]
+    for u in range(n): 
+      g[self.find(u)].append(u)
+    return [x for x in g if x]
+
+  
+  def same(
+    self,
+    u: int,
+    v: int,
+  ) -> bool:
+    return self.find(u) == self.find(v)
+
+
+  def size(
+    self,
+    u: int,
+  ) -> int:
+    return self.__s[self.find(u)]
 
 
   def unite(

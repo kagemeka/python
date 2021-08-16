@@ -1,5 +1,8 @@
-import typing 
+import typing
+import sys
+sys.setrecursionlimit(1 << 20)
 import dataclasses
+
 
 
 @dataclasses.dataclass 
@@ -11,14 +14,11 @@ class Node():
 
 
 class UnionFind():
-
   def __init__(
     self,
     n: int,
   ) -> typing.NoReturn:
-    self.__a = [
-      Node(i) for i in range(n)
-    ]
+    self.__a = [Node(i) for i in range(n)]
   
 
   def find(
@@ -31,7 +31,32 @@ class UnionFind():
     pu = self.find(pu)
     a[u].parent = pu
     return pu
-  
+
+
+  def groups(self) -> typing.List[
+    typing.List[int]
+  ]:
+    n = len(self.__a)
+    g = [[] for _ in range(n)]
+    for u in range(n): 
+      g[self.find(u)].append(u)
+    return [x for x in g if x]
+
+
+  def same(
+    self,
+    u: int,
+    v: int,
+  ) -> bool:
+    return self.find(u) == self.find(v)
+
+
+  def size(
+    self,
+    u: int,
+  ) -> int:
+    return self.__a[self.find(u)].size
+
 
   def unite(
     self,
@@ -42,17 +67,7 @@ class UnionFind():
     v = self.find(v)
     if u == v: return 
     a = self.__a
-    if a[u].size < a[v].size:
+    if a[u].size < a[v].size: 
       u, v = v, u
     a[u].size += a[v].size
     a[v].parent = u
-  
-
-  def same(
-    self,
-    u: int,
-    v: int,
-  ) -> bool:
-    u = self.find(u)
-    v = self.find(v)
-    return u == v
