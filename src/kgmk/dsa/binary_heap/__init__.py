@@ -43,10 +43,7 @@ class Heap():
     while 1:
       j = i * 2 + 1
       if j >= len(a): break
-      j += (
-        j < len(a) - 1 and
-        a[j + 1] < a[j]
-      )
+      j += j < len(a) - 1 and a[j + 1] < a[j]
       if a[i] <= a[j]: break
       self.__swap(i, j)
       i = j
