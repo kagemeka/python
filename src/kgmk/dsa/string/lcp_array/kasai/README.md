@@ -9,7 +9,7 @@
   - output: lcp array (height array)
 - algorithm
   - prepare rank array := index of each suffix in the suffix array.
-  - prepare height array, $h[i] := lcp(sa[i], sa[i + 1])$, where sa := suffix array
+  - prepare height array, $h[i + 1] := lcp(sa[i], sa[i + 1])$, where sa := suffix array
   - calculate heights in order from long to short suffix.
     - let i := current suffix's index
     - look up the suffix index next to current suffix by using rank array and suffix array.
@@ -31,9 +31,9 @@
         - $k :=$ adjacent suffix's index of suffix $i + 1$
     - therefore, if $lcp(i, j) = l$, 
       $lcp(i + 1, k)$ does not need to be calculated with brute-force.  
-      it's enough to enough to be calculated from i + l and k + l - 1.  
-      in other words, it's enough to calculate lcp(i + l, k + l - 1).  
-      $lcp(i + 1, k) = lcp(i, j) + lcp(i + l, k + l - 1)$  
+      it's enough to be calculated from $i + l$ and $k + l - 1$.  
+      in other words, it's enough to calculate $lcp(i + l, k + l - 1)$.  
+      $lcp(i + 1, k) = lcp(i, j) - 1 + lcp(i + l, k + l - 1)$  
     - be careful about index out of range.
 
 
