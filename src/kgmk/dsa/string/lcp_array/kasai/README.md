@@ -1,5 +1,5 @@
-# kasai's LCP algorithm
-
+# kasai's LCP Array algorithm
+- $O(N)$
 
 
 
@@ -41,14 +41,14 @@
 # Example
 consider the case of 'banana'
 
-| suffix      | saffix array | rank |
-| :-     | - | - | 
-| a      | 5 | 0 |
-| ana    | 3 | 1 | 
-| anana  | 1 | 2 |
-| banana | 0 | 3 |
-| na     | 4 | 4 |
-| nana   | 2 | 5 |
+| suffix | saffix array | rank | lcp array |
+| :-     | - | - | - |
+| a      | 5 | 0 | 0 |
+| ana    | 3 | 1 | 1 |
+| anana  | 1 | 2 | 3 |
+| banana | 0 | 3 | 0 |
+| na     | 4 | 4 | 0 |
+| nana   | 2 | 5 | 2 |
 - lcp(ana, anana) $= lcp(3, 1) = 3$,   
   then lcp(na, nana) $= lcp(4, 2) = 2 \ge 3 - 1$  
   then lcp(a, ana) $= lcp(5, 3) = 1 \ge 2 - 1$
