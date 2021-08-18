@@ -57,32 +57,31 @@ class SAIS():
     self,
   ) -> typing.NoReturn:
     sa = self.__sa
-    sa_index = self.__b.copy()
+    sa_idx = self.__b.copy()
     s = 0
     for i in range(self.__m):
-      s += sa_index[i]
-      sa_index[i] = s - sa_index[i]
+      s, sa_idx[i] = s + sa_idx[i], s
     for i in range(len(sa)):
       i = sa[i] - 1
       if i < 0 or self.__is_s[i]: continue
       x = self.__a[i]
-      sa[sa_index[x]] = i
-      sa_index[x] += 1
+      sa[sa_idx[x]] = i
+      sa_idx[x] += 1
 
 
   def __induce_s(
     self,
   ) -> typing.NoReturn:
     sa = self.__sa
-    sa_index = self.__b.copy()
+    sa_idx = self.__b.copy()
     for i in range(self.__m - 1):
-      sa_index[i + 1] += sa_index[i]
+      sa_idx[i + 1] += sa_idx[i]
     for i in range(len(sa) - 1, -1, -1):
       i = sa[i] - 1
       if i < 0 or not self.__is_s[i]: continue
       x = self.__a[i]
-      sa_index[x] -= 1
-      sa[sa_index[x]] = i
+      sa_idx[x] -= 1
+      sa[sa_idx[x]] = i
 
 
   def __make_bucket(
@@ -102,7 +101,7 @@ class SAIS():
       a = [x + 1 for x in a]
     assert all(x > 0 for x in a)
     self.__m = max(a) + 1
-    a.append(0)
+    a = a + [0]
     n = len(a)
     self.__a = a
 
@@ -125,10 +124,10 @@ class SAIS():
   def __set_lms(
     self,
   ) -> typing.NoReturn:
-    sa_index = self.__b.copy()
+    sa_idx = self.__b.copy()
     for i in range(self.__m - 1):
-      sa_index[i + 1] += sa_index[i]
+      sa_idx[i + 1] += sa_idx[i]
     for i in self.__lms[::-1]:
       x = self.__a[i]
-      sa_index[x] -= 1
-      self.__sa[sa_index[x]] = i
+      sa_idx[x] -= 1
+      self.__sa[sa_idx[x]] = i
