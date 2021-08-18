@@ -11,3 +11,8 @@
 
 # verify
 - [Yosupo Judge Suffix Array](https://judge.yosupo.jp/problem/suffixarray)
+
+
+
+# note
+- numba implementation is too slow
