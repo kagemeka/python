@@ -22,7 +22,7 @@ def sa_is(
   for i in range(1, n):
     is_lms[i] = is_s[i] & ~is_s[i - 1]
 
-  lms = np.flatnonzero(is_lms) # after
+  lms = np.flatnonzero(is_lms)
 
   b = np.zeros(m, dtype=np.int64)
   for x in a: b[x] += 1

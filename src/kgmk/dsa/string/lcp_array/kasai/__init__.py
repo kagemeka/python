@@ -2,7 +2,7 @@ import typing
 
 
 
-class Kasai():
+class LCPKasai():
   def __call__(
     self,
     a: typing.List[int],

@@ -10,7 +10,6 @@ class SADoubling():
     n = len(a)
     self.__n, self.__a = n, a
     self.__compress()
-    self.__cnt = [0] * (n + 2)
     self.__doubling()
     return self.__sa
 
@@ -28,8 +27,9 @@ class SADoubling():
     self,
     a: typing.List[int],
   ) -> typing.List[int]:
-    c, n = self.__cnt, self.__n 
+    n = self.__n 
     assert len(a) == n
+    c = [0] * (n + 2)
     for x in a: c[x + 1] += 1
     for i in range(n): c[i + 1] += c[i]
     idx = [0] * n
@@ -37,7 +37,6 @@ class SADoubling():
       x = a[i]
       idx[c[x]] = i
       c[x] += 1
-    for i in range(n + 1): c[i] = 0
     return idx
   
 
@@ -55,10 +54,10 @@ class SADoubling():
       ord_a = self.__count_sort(a)
       sa = [ord_b[i] for i in ord_a]
       c = [
-        a[ord_a[i]] << 32 | b[sa[i]] 
+        a[ord_a[i]] << 30 | b[sa[i]] 
         for i in range(n)
       ]
-      rank = [0] * n
+      rank[sa[0]] = 0 
       for i in range(n - 1):
         rank[sa[i + 1]] = rank[sa[i]] + (c[i + 1] > c[i])
       k *= 2
