@@ -3,46 +3,42 @@ from ...prime_numbers import (
 )
 # TODO cut below
 
-
-from typing import (
-  DefaultDict, 
-)
-from collections import (
-  defaultdict,
-)
+import typing 
+import collections
 
 
-class PrimeFactorize:
+
+class PrimeFactorize():
   def __call__(
     self,
     n: int,
-  ) -> DefaultDict[int, int]:
-    f = defaultdict(int)
+  ) -> typing.DefaultDict[int, int]:
+    f = collections.defaultdict(int)
     for p in self.__pn:
-      if n < 2: return f
       if p * p > n: break
       while n % p == 0:
+        n //= p 
         f[p] += 1
-        n //= p
-    f[n] = 1; return f
+    if n > 1: f[n] = 1
+    return f
   
 
   def __init__(
     self,
-    n: int = 1 << 20,
-  ):
-    pn = PrimeNumbers(n)
-    self.__pn = tuple(pn)
+    max_n: int = 1 << 40,
+  ) -> typing.NoReturn:
+    n = 1
+    while n * n <= max_n:
+      n <<= 1
+    self.__pn = PrimeNumbers()(n)
+  
 
-    
   def factorial(
-    self, 
+    self,
     n: int,
-  ) -> DefaultDict[int, int]:
-    f = defaultdict(int)
+  ) -> typing.List[int]:
+    f = collections.defaultdict(int)
     for i in range(n + 1):
-      for (
-        p, c,
-      ) in self(i).items():
+      for p, c in self(i).items():
         f[p] += c
     return f

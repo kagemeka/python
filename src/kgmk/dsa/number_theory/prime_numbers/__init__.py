@@ -1,5 +1,4 @@
-from ..sieve_of_eratosthenes \
-import (
+from ..sieve_of_eratosthenes import (
   SieveOfEratosthenes,
 )
 # TODO cut below
@@ -7,32 +6,10 @@ import (
 import typing
 
 
-
 class PrimeNumbers():
-  def __getitem__(
+  def __call__(
     self,
-    i: int,
-  ) -> int:
-    return self.__a[i] 
-
-
-  def __init__(
-    self, 
     n: int = 1 << 20,
-  ) -> typing.NoReturn:
-    fn = SieveOfEratosthenes()
-    a = fn(n)
-    self.__a = tuple(
-      i for i in range(n) 
-      if a[i]
-    )
-
-
-  def __iter__(
-    self,
-  ) -> typing.Iterator[int]:
-    return iter(self.__a)
-
-
-  def __repr__(self) -> str:
-    return f'{self.__a}'
+  ) -> typing.List[int]:
+    s = SieveOfEratosthenes()(n)
+    return [i for i in range(n) if s[i]]
