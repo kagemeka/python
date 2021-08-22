@@ -1,37 +1,39 @@
 import numpy as np
-import numba as nb
+import numba as nb 
 
 
 
 @nb.njit
 def prime_factorize(
   n: int,
-  lpf: np.array,
 ) -> np.array:
-  p, c = [-1], [-1]
-  while n > 1:
-    i = lpf[n]
-    n //= i
-    if p[-1] == i:
-      c[-1] += 1
-      continue
+  p, c = [], []
+  i = 1
+  while i * i < n:
+    i += 1
+    if n % i: continue
     p.append(i)
+    c.append(0)
+    while n % i == 0:
+      n //= i
+      c[-1] += 1
+  if n > 1: 
+    p.append(n)
     c.append(1)
   return np.vstack((
     np.array(p),
     np.array(c),
-  )).T[1:]
+  )).T
 
 
 @nb.njit
 def prime_factorize_factorial(
   n: int,
-  lpf: np.array,
 ) -> np.array:
   prime, cnt = [], []
   idx = np.full(n + 1, -1, dtype=np.int32)
   for i in range(n + 1):
-    for p, c in prime_factorize(i, lpf):
+    for p, c in prime_factorize(i):
       i = idx[p]
       if i != -1:
         cnt[i] += c
