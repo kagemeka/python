@@ -1,49 +1,39 @@
+from ..cumprod.np import (
+  ModCumprod,
+)
+
+# TODO cut below 
+
+
 import typing
 import numpy as np
 
 
 
-class ModFactorial:
+
+class ModFactorial():
   def __call__(
-    self, 
-    n: int = 1 << 20,
+    self,
+    n: int=1 << 20,
   ) -> np.array:
-    a = np.arange(n); a[0] = 1
-    return self.cumprod(a)
-
-
-  def cumprod(
-    self, 
-    a: np.array,
-  ) -> np.array:
-    m = self.__mod
-    l = len(a)
-    n = int(np.sqrt(l) + 1)
-    a = np.resize(a, (n, n))
-    for i in range(n-1):
-      a[:, i + 1] *= a[:, i]
-      a[:, i + 1] %= m
-    for i in range(n-1):
-      a[i + 1] *= a[i, -1]
-      a[i + 1] %= m
-    return np.ravel(a)[:l]
-
+    cumprod = ModCumprod(self.__mod)
+    a = np.arange(n)
+    a[0] = 1
+    return cumprod(a)
+  
 
   def __init__(
     self,
-    modulo: int,
+    mod: int,
   ) -> typing.NoReturn:
-    self.__mod = modulo 
-  
+    self.__mod = mod
+
 
   def inv(
-    self, 
-    n: int = 1 << 20,
+    self,
+    n: int=1 << 20,
   ) -> np.array:
+    mod = self.__mod
     a = np.arange(1, n + 1)
-    m = self.__mod
-    x = int(self(n)[-1])
-    a[-1] = pow(x, m - 2, m)
-    return self.cumprod(
-      a[::-1],
-    )[n::-1]
+    a[-1] = pow(int(self(n)[-1]), mod - 2, mod)
+    return ModCumprod(mod)(a[::-1])[::-1]

@@ -1,7 +1,4 @@
-from \
-  ...algebra.modular \
-  .factorial.np \
-import (
+from ...algebra.modular.factorial import (
   ModFactorial,
 )
 
