@@ -1,3 +1,8 @@
+from ..cumprod import (
+  ModCumprod,
+)
+
+# TODO cut below
 import typing
 
 
@@ -9,35 +14,24 @@ class ModFactorial():
   ) -> typing.List[int]:
     a = list(range(n))
     a[0] = 1
-    self.cumprod(a)
+    ModCumprod(self.__mod)(a)
     return a
-
-
-  def cumprod(
-    self,
-    a: typing.List[int],
-  ) -> typing.NoReturn:
-    for i in range(len(a) - 1):
-      a[i + 1] *= a[i]
-      a[i + 1] %= self.__mod
 
 
   def __init__(
     self,
-    modulo: int,
+    mod: int,
   ) -> typing.NoReturn:
-    self.__mod = modulo
+    self.__mod = mod 
   
 
   def inv(
     self,
     n: int = 1 << 20,
   ) -> typing.List[int]:
-    b = self(n)
     a = list(range(1, n + 1))
-    m = self.__mod
-    x = pow(b[-1], m - 2, m)
-    a[-1] = x
+    mod = self.__mod
+    a[-1] = pow(self(n)[-1], mod - 2, mod)
     a.reverse()
-    self.cumprod(a)
+    ModCumprod(mod)(a)
     return a[::-1]
