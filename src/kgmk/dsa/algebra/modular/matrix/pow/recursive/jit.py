@@ -1,4 +1,4 @@
-from ..dot.jit import (
+from ...dot.jit import (
   mod_matrix_dot,
 )
 
