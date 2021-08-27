@@ -1,4 +1,4 @@
-from ..dot.with_decomposition.np import (
+from ...dot.with_decomposition.np import (
   ModMatrixDot,
 )
 
