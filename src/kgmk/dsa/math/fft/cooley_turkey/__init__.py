@@ -28,6 +28,7 @@ class FFT():
   ) -> typing.List[complex]:
     n = len(a)
     h = n.bit_length() - 1
+    assert 1 << h == n
     self.__a = a
     self.__n, self.__h = n, h
     self.__reverse_bits()

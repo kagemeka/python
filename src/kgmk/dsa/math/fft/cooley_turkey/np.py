@@ -27,6 +27,7 @@ class FFT():
     self.__a = a.astype(np.complex128)
     n = a.size
     h = n.bit_length() - 1
+    assert 1 << h == n
     self.__n, self.__h = n, h
     self.__reverse_bits()
     self.__butterfly()
