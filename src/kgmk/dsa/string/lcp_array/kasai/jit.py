@@ -5,9 +5,9 @@ import numba as nb
 
 @nb.njit
 def lcp_kasai(
-  a: np.array,
-  sa: np.array,
-) -> np.array:
+  a: np.ndarray,
+  sa: np.ndarray,
+) -> np.ndarray:
   n = a.size
   assert n > 0 and sa.size == n
   
