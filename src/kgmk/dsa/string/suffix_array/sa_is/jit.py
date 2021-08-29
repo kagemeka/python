@@ -5,6 +5,30 @@ import numba as nb
 
 
 @nb.njit
+def _compute_next_array(
+  a: np.ndarray, 
+  sa: np.ndarray, 
+  is_lms: np.ndarray,
+) -> np.ndarray:
+  n = a.size
+  lms_idx = sa[is_lms[sa]]
+  l = lms_idx.size
+  na = np.full(n, -1, dtype=np.int64)
+  na[-1] = i = 0
+  for j in range(l - 1):
+    j, k = lms_idx[j], lms_idx[j + 1]
+    for d in range(n):
+      j_is_lms = is_lms[j + d]
+      k_is_lms = is_lms[k + d]
+      if a[j + d] != a[k + d] or j_is_lms ^ k_is_lms: 
+        i += 1; break
+      if d > 0 and j_is_lms | k_is_lms: break
+    na[k] = i
+  na = na[na >= 0]
+  return na
+
+
+@nb.njit
 def _induce(
   a: np.ndarray,
   is_s: np.ndarray,
@@ -65,30 +89,6 @@ def _preprocess(
   bucket = np.bincount(a)
   return is_s, is_lms, lms, bucket
   
-
-@nb.njit
-def _compute_next_array(
-  a: np.ndarray, 
-  sa: np.ndarray, 
-  is_lms: np.ndarray,
-) -> np.ndarray:
-  n = a.size
-  lms_idx = sa[is_lms[sa]]
-  l = lms_idx.size
-  na = np.full(n, -1, dtype=np.int64)
-  na[-1] = i = 0
-  for j in range(l - 1):
-    j, k = lms_idx[j], lms_idx[j + 1]
-    for d in range(n):
-      j_is_lms = is_lms[j + d]
-      k_is_lms = is_lms[k + d]
-      if a[j + d] != a[k + d] or j_is_lms ^ k_is_lms: 
-        i += 1; break
-      if d > 0 and j_is_lms | k_is_lms: break
-    na[k] = i
-  na = na[na >= 0]
-  return na
-
 
 @nb.njit
 def sa_is(
