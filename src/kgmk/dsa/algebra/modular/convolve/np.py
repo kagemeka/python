@@ -1,22 +1,44 @@
+import typing 
 import numpy as np
-from scipy import signal
 
 
-def mod_convolve(
-  f: np.ndarray,
-  g: np.ndarray,
-  mod: int,
-) -> np.ndarray:
-  N = 15
-  BASE = 1 << N
-  f1, f0 = np.divmod(f, BASE)
-  g1, g0 = np.divmod(g, BASE)
-  a = signal.fftconvolve(f1, g1)
-  c = signal.fftconvolve(f0, g0)
-  a = np.rint(a).astype(np.int64) % mod
-  c = np.rint(c).astype(np.int64) % mod
-  b = signal.fftconvolve(f0 + f1, g0 + g1)
-  b = np.rint(b).astype(np.int64) % mod
-  b = (b - a - c) % mod
-  h = (a << N * 2) + (b << N) + c
-  return h % mod
+
+class ModConvolve():
+  def __call__(
+    self,
+    f: np.ndarray,
+    g: np.ndarray,
+  ) -> np.ndarray:
+    mod = self.__mod
+    N: typing.Final[int] = 10
+    BASE: typing.Final[int] = 1 << N
+    f, f0 = np.divmod(f, BASE)
+    f2, f1 = np.divmod(f, BASE)
+    g, g0 = np.divmod(g, BASE)
+    g2, g1 = np.divmod(g, BASE)
+    h0 = self.__conv(f0, g0)
+    ha = self.__conv(f1, g1)
+    h4 = self.__conv(f2, g2)
+    h1 = self.__conv(f0 + f1, g0 + g1) - h0 - ha
+    h3 = self.__conv(f1 + f2, g1 + g2) - ha - h4
+    h2 = self.__conv(f0 + f2, g0 + g2) - h0 - h4 + ha
+    h = (h4 << N * 2) + (h3 << N) + h2
+    h = (h % mod << N * 2) + (h1 << N) + h0
+    return h % mod
+    
+  
+  def __conv(
+    self,
+    f: np.ndarray,
+    g: np.ndarray,
+  ) -> np.ndarray:
+    from scipy import signal
+    h = signal.fftconvolve(f, g)
+    return np.rint(h).astype(np.int64) % self.__mod
+
+
+  def __init__(
+    self,
+    mod: int, 
+  ) -> typing.NoReturn:
+    self.__mod = mod
