@@ -1,1 +1,1 @@
-# Longest common subsequence
+# Longest common substring
