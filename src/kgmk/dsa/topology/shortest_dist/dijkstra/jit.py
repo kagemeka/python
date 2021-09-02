@@ -8,13 +8,13 @@ import numba as nb
   (nb.i8, nb.i8[:, :], nb.i8),
   cache=True,
 )
-def shortest_path_dijkstra(
+def shortest_dist_dijkstra(
   n: int,
   edges: np.ndarray,
   src: int,
 ) -> np.ndarray:
   inf = 1 << 60
-  edges = edges[np.argsort(edges[:, 0])]
+  edges = edges[np.argsort(edges[:, 0], kind='mergesort')]
   idx = np.searchsorted(edges[:, 0], np.arange(n + 1)) 
   dist = np.full(n, inf, np.int64)
   dist[src] = 0
