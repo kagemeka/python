@@ -9,7 +9,6 @@ from ..graph import (
 
 class FloydWarshall:
   
-
   def __init__(
     self,
     graph: Graph,
