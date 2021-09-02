@@ -1,18 +1,18 @@
-from ...graph import (
+from ...graph.pypy import (
   Graph,
 )
 
+# TODO cut below
 
-# TODO cut below 
-
-import dataclasses
 import typing 
 
 
-
-@dataclasses.dataclass 
 class Config():
-  inf: int = 1 << 60
+  def __init__(
+    self,
+    inf: int = 1 << 60,
+  ) -> typing.NoReturn:
+    self.inf = inf
 
 
 
@@ -43,3 +43,4 @@ class ShortestDistDijkstra():
     cfg: Config,
   ) -> typing.NoReturn:
     self.__cfg = cfg
+    
