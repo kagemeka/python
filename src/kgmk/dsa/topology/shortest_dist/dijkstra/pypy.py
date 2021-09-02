@@ -1,18 +1,18 @@
-from ...graph import (
+from ...graph.pypy import (
   Graph,
 )
 
+# TODO cut below
 
-# TODO cut below 
-
-import dataclasses
 import typing 
 
 
-
-@dataclasses.dataclass 
 class Config():
-  inf: int = 1 << 60
+  def __init__(
+    self,
+    inf: int = 1 << 60,
+  ) -> typing.NoReturn:
+    self.inf = inf
 
 
 
@@ -23,8 +23,7 @@ class ShortestDistDijkstra():
     src: int,
   ) -> typing.List[int]:
     import heapq 
-    n = g.size
-    dist = [self.__cfg.inf] * n
+    dist = [self.__cfg.inf] * g.size
     dist[src] = 0
     hq = [(0, src)]
     while hq:
@@ -43,3 +42,4 @@ class ShortestDistDijkstra():
     cfg: Config,
   ) -> typing.NoReturn:
     self.__cfg = cfg
+    

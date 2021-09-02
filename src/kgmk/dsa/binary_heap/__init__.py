@@ -3,7 +3,7 @@ import heapq
 
 
 @typing.final
-class Heap():
+class BinaryHeap():
   def __init__(
     self,
   ) -> typing.NoReturn:
