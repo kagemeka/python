@@ -7,7 +7,7 @@ import numba as nb
   (nb.i8[:, :], ),
   cache=True,
 )
-def to_undirected(
+def csgraph_to_undirected(
   g: np.ndarray,
 ) -> np.ndarray:
   n = len(g)
@@ -18,21 +18,18 @@ def to_undirected(
 
 
 
-
 @nb.njit(
   (nb.i8[:, :], nb.i8),
   cache=True,
 )
-def dense(
-  g: np.ndarray,
+def csgraph_to_dense(
+  csgraph: np.ndarray,
   n: int,
 ) -> np.ndarray:
-  m = len(g)
-  assert g.shape == (m, 3)
-  inf = 1 << 60
-  a = np.full((n, n), inf, np.int64)
-  for i in range(n): a[i, i] = 0
+  m = len(csgraph)
+  assert csgraph.shape == (m, 3)
+  g = np.zeros((n, n), np.int64)
   for i in range(m):
-    u, v, w = g[i]
-    a[u, v] = a[v, u] = w 
-  return a 
+    u, v, w = csgraph[i]
+    g[u, v] = g[v, u] = w 
+  return g 

@@ -1,12 +1,11 @@
 import heapq 
-from kgmk.dsa.binary_heap \
-import (
-  Heap,
+from kgmk.dsa.binary_heap import (
+  BinaryHeap,
 )
 
 
 def test():
-  hq = Heap()
+  hq = BinaryHeap()
   q = []
   for i in range(10, 0, -1):
     hq.push(i)

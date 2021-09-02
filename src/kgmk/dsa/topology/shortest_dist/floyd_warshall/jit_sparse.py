@@ -15,6 +15,7 @@ def floyd_warshall(
   m = len(g)
   assert g.shape == (m, 3)
   inf = 1 << 60
+  assert inf > g[:, 2].max() * n
   dist = np.full((n, n), inf, np.int64)
   for i in range(n): dist[i, i] = 0
   for i in range(m):

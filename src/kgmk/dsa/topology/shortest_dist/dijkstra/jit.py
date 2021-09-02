@@ -10,12 +10,15 @@ import numba as nb
 )
 def shortest_dist_dijkstra(
   n: int,
-  edges: np.ndarray,
+  csgraph: np.ndarray,
   src: int,
 ) -> np.ndarray:
+  assert csgraph.shape == (len(csgraph), 3)
   inf = 1 << 60
-  edges = edges[np.argsort(edges[:, 0], kind='mergesort')]
-  idx = np.searchsorted(edges[:, 0], np.arange(n + 1)) 
+  assert inf > csgraph[:, 2].max() * n
+  sort_idx = np.argsort(csgraph[:, 0], kind='mergesort')
+  csgraph = csgraph[sort_idx]
+  idx = np.searchsorted(csgraph[:, 0], np.arange(n + 1)) 
   dist = np.full(n, inf, np.int64)
   dist[src] = 0
   hq = [(0, src)]
@@ -23,7 +26,7 @@ def shortest_dist_dijkstra(
     du, u = heapq.heappop(hq)
     if du > dist[u]: continue
     for edge_idx in range(idx[u], idx[u + 1]):
-      _, v, w = edges[edge_idx]
+      _, v, w = csgraph[edge_idx]
       dv = du + w
       if dv >= dist[v]: continue
       dist[v] = dv 
