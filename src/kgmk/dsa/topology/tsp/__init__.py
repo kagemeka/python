@@ -36,8 +36,7 @@ class TSP():
   ) -> int:
     n = len(g)
     assert len(g[0]) == n
-    inf = 1 << 60
-    assert inf > sum(map(sum, g))
+    inf = float('inf')
     dist = [[inf] * n for _ in range(1 << n)]
     dist[1 << src][src] = 0 
     for s in range(1 << n):
