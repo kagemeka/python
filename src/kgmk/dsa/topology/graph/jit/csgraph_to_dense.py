@@ -12,8 +12,9 @@ def csgraph_to_dense(
 ) -> np.ndarray:
   m = len(csgraph)
   assert csgraph.shape == (m, 3)
-  g = np.zeros((n, n), np.int64)
+  inf = 1 << 60
+  g = np.full((n, n), inf, np.int64)
   for i in range(m):
     u, v, w = csgraph[i]
-    g[u, v] = g[v, u] = w 
+    g[u, v] = min(g[u, v], w)
   return g 

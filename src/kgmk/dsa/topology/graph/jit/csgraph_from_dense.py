@@ -3,18 +3,16 @@ import numba as nb
 
 
 @nb.njit(
-  (nb.i8[:, :], nb.b1),
+  (nb.i8[:, :], ),
   cache=True,
 )
 def csgraph_from_dense(
   g: np.ndarray,
-  zero_is_null: bool=True,
 ) -> np.ndarray:
+  inf = 1 << 60
   n = len(g)
   assert g.shape == (n, n)
-  exist_edge = np.full_like(g, 1, np.bool8)
-  if zero_is_null:
-    exist_edge &= g != 0
+  exist_edge = g != inf
   m = exist_edge.sum()
   csgraph = np.zeros((m, 3), np.int64)
   k = 0  

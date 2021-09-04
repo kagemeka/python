@@ -16,7 +16,7 @@ class ShortestDistDijkstra():
     src: int,
   ) -> typing.List[int]:
     import heapq 
-    inf = 1 << 60
+    inf = float('inf')
     dist = [inf] * g.size
     dist[src] = 0
     hq = [(0, src)]
