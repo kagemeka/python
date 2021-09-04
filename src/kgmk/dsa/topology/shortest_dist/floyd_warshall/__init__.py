@@ -9,7 +9,7 @@ import typing
 
 
 
-class FloydWarshall():
+class ShortestDistFloydWarshall():
   def __call__(
     self,
     g: Graph,

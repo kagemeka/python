@@ -3,6 +3,7 @@
 
 # note 
 - sparse graph
+- negative edges
 
 
 # complexity
