@@ -4,6 +4,7 @@
 # note 
 - sparse graph
 - negative edges
+- single source shortest path
 
 
 # complexity
