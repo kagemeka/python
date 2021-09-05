@@ -32,8 +32,8 @@ class ModConvolve():
     f: np.ndarray,
     g: np.ndarray,
   ) -> np.ndarray:
-    from scipy import signal
-    h = signal.fftconvolve(f, g)
+    import scipy.signal
+    h = scipy.signal.fftconvolve(f, g)
     return np.rint(h).astype(np.int64) % self.__mod
 
 
