@@ -16,7 +16,11 @@
 
 
 # time complexity 
+## with Union Find
 - $O(E\log{E} + E\text{Ackerman}^{-1}{V})$
+
+## naive
+- $O(E\log{E} + V^2)$
 
 
 # note

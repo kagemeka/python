@@ -1,4 +1,4 @@
-from ...union_find.parent_size_at_same.jit import (
+from ....union_find.parent_size_at_same.jit import (
   uf_unite,
   uf_build,
   uf_find,

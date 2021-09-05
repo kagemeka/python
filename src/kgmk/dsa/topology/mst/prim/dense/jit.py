@@ -38,6 +38,7 @@ def mst_prim_dense(
       p, w = min_edge[i]
       if w >= wu: continue
       pre, u, wu = p, i, w
+    assert wu < inf
     add_edge(pre, u, wu)
     visited[u] = True
     for v in range(n):
