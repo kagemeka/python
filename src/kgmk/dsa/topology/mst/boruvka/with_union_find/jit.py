@@ -23,18 +23,12 @@ def mst_boruvka(
   assert csgraph.shape == (m, 3)
   inf = 1  << 60
   assert csgraph[:, 2].max() < inf
-
-  mst = np.zeros((n - 1, 3), np.int64)
-  mst_idx = 0
-  def add_edge(u, v, w):
-    nonlocal mst, mst_idx
-    mst[mst_idx] = (u, v, w)
-    mst_idx += 1
-  
+  edge_is_added = np.zeros(m, np.bool8)
+  min_edge_idx = np.zeros(n, np.int64)
   uf = uf_build(n)
   root = np.arange(n)
     
-  def update_all_root():
+  def update_all_roots():
     nonlocal uf, n, root
     for i in range(n):
       root[i] = uf_find(uf, i)
@@ -43,22 +37,35 @@ def mst_boruvka(
     nonlocal root
     return np.all(root == root[0])
 
-  min_edge = np.zeros((n, 3), np.int64)
-
-  while not all_same():
-    min_edge[:, 2] = inf
+  def update_min_edge_indices():
+    nonlocal min_edge_idx, m, csgraph, root
+    min_edge_idx[:] = -1
     for i in range(m):
       u, v, w = csgraph[i]
-      if root[u] == root[v]: continue
-      if w < min_edge[root[u], 2]:
-        min_edge[root[u]] = (u, v, w)
-      if w < min_edge[root[v], 2]:
-        min_edge[root[v]] = (v, u, w)
+      u, v = root[u], root[v]
+      if u == v: continue
+      j = min_edge_idx[u]
+      if j == -1 or w < csgraph[j, 2]:
+        min_edge_idx[u] = i
+      j = min_edge_idx[v]
+      if j == -1 or w < csgraph[j, 2]:
+        min_edge_idx[v] = i
+
+  def add_min_edges():
+    nonlocal n, root, min_edge_idx, csgraph, uf
     for i in range(n):
       if i != root[i]: continue
-      u, v, w = min_edge[i]
-      if uf_find(uf, u) == uf_find(uf, v): continue
+      i = min_edge_idx[i]
+      if edge_is_added[i]: continue
+      u, v, _ = csgraph[i]
       uf_unite(uf, u, v)
-      add_edge(u, v, w)
-    update_all_root()
-  return mst
+      edge_is_added[i] = True
+
+  while not all_same():
+    update_min_edge_indices()
+    add_min_edges()
+    update_all_roots()
+
+  added_edge_indices = np.flatnonzero(edge_is_added)
+  assert added_edge_indices.size == n - 1
+  return csgraph[added_edge_indices]
