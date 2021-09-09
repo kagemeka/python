@@ -1,8 +1,8 @@
-import typing
+import typing 
 
 
 
-class Fenwick():
+class FenwickTree():
   def __init__(
     self,
     n: int,
@@ -17,16 +17,16 @@ class Fenwick():
   ) -> typing.NoReturn:
     a = self.__a
     while i < len(a):
-      a[i] += x
+      a[i] ^= x 
       i += i & -i
-
+  
 
   def __getitem__(
     self,
     i: int,
   ) -> int:
-    s = 0 
+    v = 0 
     while i > 0:
-      s += self.__a[i]
+      v ^= self.__a[i]
       i -= i & -i
-    return s
+    return v
