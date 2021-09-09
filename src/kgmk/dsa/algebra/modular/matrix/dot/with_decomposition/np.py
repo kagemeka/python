@@ -22,9 +22,7 @@ class ModMatrixDot():
     c2 = np.dot(a1, b1) % mod 
     c1 = np.dot(a0 + a1, b0 + b1) - c0 - c2
     c1 %= mod 
-    c = c0
-    c += c1 << N
-    c += c2 << N * 2
+    c = (c1 << N * 2) + (c1 << N) + c0
     return c % mod
 
 

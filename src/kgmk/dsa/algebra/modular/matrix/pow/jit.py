@@ -15,13 +15,12 @@ def mod_matrix_pow(
   n: int,
   mod: int,
 ) -> np.ndarray:
-  x = np.eye(
-    a.shape[0],
-    dtype=np.int64,
-  )
+  m = len(a)
+  assert a.shape == (m, m)
+  x = np.eye(m, dtype=np.int64)
   while n:
     if n & 1:
       x = mod_matrix_dot(x, a, mod)
-    x = mod_matrix_dot(x, x, mod)
+    a = mod_matrix_dot(a, a, mod)
     n >>= 1
   return x

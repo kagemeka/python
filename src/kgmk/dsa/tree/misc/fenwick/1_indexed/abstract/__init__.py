@@ -39,8 +39,7 @@ class FenwickTree(typing.Generic[T]):
     i: int,
     x: T,
   ) -> typing.NoReturn:
-    m = self.__monoid 
     a = self.__a
     while i < len(a):
-      a[i] = m.fn(a[i], x)
+      a[i] = self.__monoid.fn(a[i], x)
       i += i & -i
