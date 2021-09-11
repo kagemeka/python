@@ -1,8 +1,26 @@
+from __future__ import annotations 
 import typing 
 
 
 
 class FenwickTree():
+  @classmethod 
+  def from_array(
+    cls,
+    a: typing.List[int],
+  ) -> FenwickTree:
+    n = len(a)
+    a = a.copy()
+    assert a[0] == -float('inf')
+    for i in range(n):
+      j = i + (i & -i)
+      if j >= n: continue 
+      a[j] = max(a[j], a[i])
+    fw = cls(n)
+    fw._FenwickTree__a = a
+    return fw
+
+
   def __init__(
     self,
     n: int,

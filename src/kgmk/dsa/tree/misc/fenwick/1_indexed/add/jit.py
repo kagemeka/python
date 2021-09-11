@@ -3,6 +3,7 @@ import numpy as np
 import numba as nb 
 
 
+
 @nb.njit(
   (nb.i8, ),
   cache=True,
@@ -14,17 +15,17 @@ def fw_build(n: int) -> np.ndarray:
 @nb.njit(
   (nb.i8[:], ),
   cache=True,
-)
+) 
 def fw_build_from_array(
   a: np.ndarray,
 ) -> np.ndarray:
-  assert a[0] == 0
+  assert a[0] == 0 
   fw = a.copy()
-  n = fw.size  
+  n = fw.size
   for i in range(n):
     j = i + (i & -i)
-    if j < n: fw[j] ^= fw[i]
-  return fw 
+    if j < n: fw[j] += fw[i]
+  return fw
 
 
 @nb.njit(
@@ -37,7 +38,7 @@ def fw_set(
   x: int,
 ) -> typing.NoReturn:
   while i < len(fw):
-    fw[i] ^= x 
+    fw[i] += x
     i += i & -i
 
 
@@ -51,10 +52,10 @@ def fw_get(
 ) -> int:
   v = 0 
   while i > 0:
-    v ^= fw[i]
+    v += fw[i]
     i -= i & -i
   return v 
-  
+
 
 @nb.njit(
   (nb.i8[:], nb.i8, nb.i8),
@@ -65,7 +66,8 @@ def fw_get_range(
   l: int,
   r: int,
 ) -> int:
-  return fw_get(fw, l - 1) ^ fw_get(fw, r)
+  return -fw_get(fw, l - 1) + fw_get(fw, r)
+
 
 
 # if monotonic increasing.
@@ -84,8 +86,8 @@ def fw_lower_bound(
   v = 0 
   i = 0 
   while l:
-    if i + l < n and v ^ fw[i + l] < x:
+    if i + l < n and v + fw[i + l] < x:
       i += l
-      v ^= fw[i]
+      v += fw[i]
     l >>= 1
   return i + 1

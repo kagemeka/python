@@ -17,8 +17,8 @@ def fw_build_from_array(
   fn: typing.Callable[[int, int], int],
   e: int,
 ) -> np.ndarray:
+  assert a[0] == e
   fw = a.copy()
-  assert fw[0] == e
   n = fw.size  
   for i in range(n):
     j = i + (i & -i)
@@ -53,6 +53,7 @@ def fw_get(
   return v 
   
 
+# if abbelian group
 @nb.njit 
 def fw_get_range(
   fw: np.ndarray,
@@ -65,3 +66,26 @@ def fw_get_range(
   lv = fw_get(fw, l - 1, fn, e)
   rv = fw_get(fw, r, fn, e)
   return fn(inverse(lv), rv)
+
+
+# if monotonic increasing 
+@nb.njit
+def fw_lower_bound(
+  fw: np.ndarray,
+  fn: typing.Callable[[int, int], int],
+  e: int,
+  search_fn: typing.Callable[[int], bool],
+  k: int, # it's impossible to use closure with numba(v0.53.1).
+) -> int:
+  n = fw.size
+  l = 1
+  while l << 1 < n: l <<= 1
+  v = e
+  i = 0 
+  while l:
+    if i + l < n and not search_fn(fn(v, fw[i + l]), k):
+      i += l
+      v = fn(v, fw[i])
+    l >>= 1
+  return i + 1
+  
