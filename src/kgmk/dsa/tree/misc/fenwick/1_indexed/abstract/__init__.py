@@ -1,3 +1,4 @@
+from __future__ import annotations 
 from kgmk.dsa.algebra.abstract.monoid import (
   Monoid,
 )
@@ -6,12 +7,29 @@ from kgmk.dsa.algebra.abstract.monoid import (
 # TODO cut below 
 
 import typing 
-import dataclasses 
 
 
 
 T = typing.TypeVar('T')
 class FenwickTree(typing.Generic[T]):
+  @classmethod 
+  def from_array(
+    cls,
+    monoid: Monoid[T],
+    a: typing.List[T],
+  ) -> FenwickTree[T]:
+    n = len(a)
+    a = a.copy()
+    assert a[0] == monoid.e()
+    for i in range(n):
+      j = i + (i & -i)
+      if j >= n: continue
+      a[j] = monoid.fn(a[j], a[i])
+    fw = cls(monoid, n)
+    fw._FenwickTree__a = a
+    return fw
+
+
   def __getitem__(
     self,
     i: int,
