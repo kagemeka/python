@@ -47,3 +47,32 @@ class FenwickTree():
       v += self.__a[i]
       i -= i & -i
     return v
+
+
+  def get_range(
+    self,
+    l: int,
+    r: int,
+  ) -> int:
+    return -self(l - 1) + self(r)
+
+
+
+  # if monotonic increasing.
+  # different per problem
+  def lower_bound(
+    self,
+    x: int
+  ) -> int:
+    a = self.__a
+    n = len(a)
+    l = 1
+    while l << 1 < n: l <<= 1
+    v = 0 
+    i = 0 
+    while l:
+      if i + l < n and v + a[i + l] < x:
+        i += l
+        v += a[i]
+      l >>= 1
+    return i + 1
