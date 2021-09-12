@@ -1,8 +1,8 @@
-# Shortest Path BFS 
+# Shortest Path Dijkstra
 
 
-# summary
-- return predecessor
+# summary 
+- return predecessors
 
 
 # problems

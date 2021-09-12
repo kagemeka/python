@@ -4,21 +4,13 @@ import numba as nb
 
 
 
-@nb.njit(
-  (nb.i8, ),
-  cache=True,
-)
+@nb.njit((nb.i8, ), cache=True)
 def fw_build(n: int) -> np.ndarray:
   return np.full(n + 1, 0, np.int64)
 
 
-@nb.njit(
-  (nb.i8[:], ),
-  cache=True,
-) 
-def fw_build_from_array(
-  a: np.ndarray,
-) -> np.ndarray:
+@nb.njit((nb.i8[:], ), cache=True) 
+def fw_build_from_array(a: np.ndarray) -> np.ndarray:
   assert a[0] == 0 
   fw = a.copy()
   n = fw.size
@@ -28,28 +20,15 @@ def fw_build_from_array(
   return fw
 
 
-@nb.njit(
-  (nb.i8[:], nb.i8, nb.i8),
-  cache=True,
-)
-def fw_set(
-  fw: np.ndarray,
-  i: int,
-  x: int,
-) -> typing.NoReturn:
+@nb.njit((nb.i8[:], nb.i8, nb.i8), cache=True)
+def fw_set(fw: np.ndarray, i: int, x: int) -> typing.NoReturn:
   while i < len(fw):
     fw[i] += x
     i += i & -i
 
 
-@nb.njit(
-  (nb.i8[:], nb.i8),
-  cache=True,
-)
-def fw_get(
-  fw: np.ndarray,
-  i: int,
-) -> int:
+@nb.njit((nb.i8[:], nb.i8), cache=True)
+def fw_get(fw: np.ndarray, i: int) -> int:
   v = 0 
   while i > 0:
     v += fw[i]
@@ -57,34 +36,20 @@ def fw_get(
   return v 
 
 
-@nb.njit(
-  (nb.i8[:], nb.i8, nb.i8),
-  cache=True,
-)
-def fw_get_range(
-  fw: np.ndarray,
-  l: int,
-  r: int,
-) -> int:
+@nb.njit((nb.i8[:], nb.i8, nb.i8), cache=True)
+def fw_get_range(fw: np.ndarray, l: int, r: int) -> int:
   return -fw_get(fw, l - 1) + fw_get(fw, r)
 
 
 
 # if monotonic increasing.
 # different per problem
-@nb.njit(
-  (nb.i8[:], nb.i8),
-  cache=True,
-)
-def fw_lower_bound(
-  fw: np.ndarray,
-  x: int
-) -> int:
+@nb.njit((nb.i8[:], nb.i8), cache=True)
+def fw_lower_bound(fw: np.ndarray, x: int) -> int:
   n = fw.size
   l = 1
   while l << 1 < n: l <<= 1
-  v = 0 
-  i = 0 
+  v, i = 0, 0
   while l:
     if i + l < n and v + fw[i + l] < x:
       i += l
