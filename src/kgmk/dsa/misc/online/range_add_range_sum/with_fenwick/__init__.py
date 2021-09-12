@@ -20,18 +20,16 @@ class RangeAddRangeSum():
     x: int,
   ) -> typing.NoReturn:
     l, r = lr 
-    r += 1
-    self.__fw0[l] = -x * l 
-    self.__fw0[r] = x * r 
+    self.__fw0[l] = -x * (l - 1)
+    self.__fw0[r + 1] = x * r 
     self.__fw1[l] = x 
-    self.__fw1[r] = -x 
+    self.__fw1[r + 1] = -x 
   
 
   def __getitem__(
     self,
-    i: typing.Tuple[int, int],
+    i: int,
   ) -> int:
-    i += 1
     return self.__fw0[i] + self.__fw1[i] * i
   
 
