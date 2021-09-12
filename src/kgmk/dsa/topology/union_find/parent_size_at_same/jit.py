@@ -4,14 +4,12 @@ import numba as nb
 
 
 
-@nb.njit
-def uf_build(
-  n: int,
-) -> np.ndarray:
+@nb.njit((nb.i8, ), cache=True)
+def uf_build(n: int) -> np.ndarray:
   return np.full(n, -1, np.int64)
 
 
-@nb.njit
+@nb.njit((nb.i8[:], nb.i8), cache=True)
 def uf_find(
   uf: np.ndarray,
   u: int,
@@ -21,7 +19,7 @@ def uf_find(
   return uf[u]
 
 
-@nb.njit
+@nb.njit((nb.i8[:], nb.i8, nb.i8), cache=True)
 def uf_unite(
   uf: np.ndarray,
   u: int,

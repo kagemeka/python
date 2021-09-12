@@ -25,18 +25,17 @@ def mst_kruskal(
   csgraph = csgraph[sort_idx]
   uf = uf_build(n)
 
-  edge_indices = np.zeros(m, np.int64)
-  j = 0
-
+  added_edge_indices = np.zeros(m, np.int64)
+  idx_to_add = 0 
   def add_edge(i):
-    nonlocal edge_indices, j
-    edge_indices[j] = i
-    j += 1
+    nonlocal idx_to_add
+    added_edge_indices[idx_to_add] = i
+    idx_to_add += 1
 
   for i in range(m):
     u, v, _ = csgraph[i]
     if uf_find(uf, u) == uf_find(uf, v): continue
     uf_unite(uf, u, v)
     add_edge(i)
-
-  return csgraph[edge_indices[:j]]
+  
+  return csgraph[added_edge_indices[:idx_to_add]]

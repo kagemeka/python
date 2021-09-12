@@ -15,6 +15,10 @@
 
 
 
+# problems 
+- [AtCoder ABC218 E - Destruction](https://atcoder.jp/contests/abc218/tasks/abc218_e)
+
+
 # time complexity 
 ## with Union Find
 - $O(E\log{E} + E\text{Ackerman}^{-1}{V})$
