@@ -13,7 +13,10 @@
   - add, lower bound
 - [AtCoder ABC174 F - Range Set Query](https://atcoder.jp/contests/abc174/tasks/abc174_f)
   - add
+- [AtCoder ABC186 F - Rook on Grid](https://atcoder.jp/contests/abc186/tasks/abc186_f)
+  - add
 
+  
 
 # use case 
 - point set, range get
