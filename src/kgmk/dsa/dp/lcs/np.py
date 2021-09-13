@@ -15,8 +15,7 @@ class LCS():
     )
     for i in range(n):
       np.maximum(
-        l[i, :-1] 
-        + (a[i] == b),
+        l[i, :-1] + (a[i] == b),
         l[i, 1:],
         out=l[i + 1, 1:],
       )
