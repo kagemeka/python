@@ -17,7 +17,6 @@
   $
 
 
-
 # proof (GCD can be calculated by Euclidean algorithm)
 - caluculate $\gcd{(a, b)}$
 - let $a = bq + r (a, b, q, r \in \mathbb{N})$
@@ -27,6 +26,7 @@
 4. on the other hand, let $a\prime := a - qb, d\prime := \gcd(b, a\prime)$
 5. similarly, $d\prime |(a\prime + qb) \rightarrow \gcd(b, a\prime) | \gcd(a\prime + qb, b) \leftrightarrow \gcd(b, a - qb) | \gcd(a, b)$ 
 6. from 3 and 5, $\gcd(a, b) = \gcd(b, a - qb) = \gcd(b, r)$
+
 
 # references 
 - [wiki en GCD](https://en.wikipedia.org/wiki/Greatest_common_divisor)
