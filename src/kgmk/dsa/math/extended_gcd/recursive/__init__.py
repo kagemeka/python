@@ -9,6 +9,5 @@ class ExtGCD():
     b: int,
   ) -> typing.Tuple[int, int, int]:
     if not b: return a, 1, 0
-    q, r = divmod(a, b)
-    g, s, t = self(b, r)
-    return g, t, s - q * t
+    g, s, t = self(b, a % b)
+    return g, t, s - a // b * t
