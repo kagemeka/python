@@ -14,7 +14,7 @@ class BaseConvert:
     
 
   @staticmethod 
-  def from_nry(
+  def from_nary(
     bits: typing.List[int],
     base: int,
   ) -> int:
@@ -28,7 +28,7 @@ class BaseConvert:
 
 
   @staticmethod
-  def to_nry(
+  def to_nary(
     n: int,
     base: int,
   ) -> typing.List[int]:

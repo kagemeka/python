@@ -73,3 +73,8 @@
 - [manabitimes ax + by = c](https://manabitimes.jp/math/674)
 - [mabanitimes euclidean algorithm](https://manabitimes.jp/math/672)
 - [qiita drken](https://qiita.com/drken/items/b97ff231e43bce50199a)
+
+
+
+# problems 
+- [AtCoder ABC186 E - Throne](https://atcoder.jp/contests/abc186/tasks/abc186_e)

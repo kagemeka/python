@@ -47,15 +47,16 @@ def mst_boruvka(
     l = 0
     for i in range(n):
       if label[i] != -1: continue
+      label[i] = l
       st = [i]
       while st:
         u = st.pop()
-        label[u] = l
         for j in range(edge_idx[u], edge_idx[u + 1]):
           j = added_edge_indices[j]
           if j == -1: break
           v = csgraph[j, 1]
           if label[v] != -1: continue
+          label[v] = l
           st.append(v)      
       l += 1
     return label  

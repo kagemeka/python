@@ -46,3 +46,12 @@
 8. $x \equiv b_1 \mod{m_1}, x \equiv b_2 \mod{m_2}$
 9. $\therefore x \equiv b_1 + sm_1p = b_2 - sm_2q \mod{\text{lcm}(m_1, m_2)}$
 
+
+
+
+# use cases
+- calculate large number 
+- RSA 
+
+# problems 
+- [AtCoder ABC186 E - Throne](https://atcoder.jp/contests/abc186/tasks/abc186_e)

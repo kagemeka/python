@@ -1,4 +1,19 @@
-# Modular Multipricative Inverse 
+# Modular Multiplicative Inverse 
+
+
+
+# summary
+- $\exist{x}, ax \equiv 1 \mod{N} \leftrightarrow \exist{x}, x \equiv a^{-1} \mod{N} \leftrightarrow a \bot N$
+
+
+# algorithm
+- fermat's little theorem
+  - mod must be prime
+  - $O(\log{N})$
+- euler's theorem
+  - $O(\sqrt{N})$ or $O(\log{N})$ with preprocessing
+- extended euclidean algorithm 
+  - $O(\log{N})$
 
 
 
@@ -25,6 +40,8 @@
 # references
 - [wiki en fermat little theorem](https://en.wikipedia.org/wiki/Fermat%27s_little_theorem)
 - [wiki ja fermat little theorem](https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86)
+- [wiki ja modular multiplicative inverse](https://ja.wikipedia.org/wiki/%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%A9%E9%80%86%E6%95%B0)
+- [wiki en modular multiplicative inverse](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse)
 
 
 # tips 
@@ -38,3 +55,8 @@
     - $\forall{i}, b_i \bot N$
   - $B = \{ab_1, ab_2, ..., ab_{\varphi(N)} \}$
   - $\prod{A} \equiv \prod{B} \leftrightarrow a^{\varphi(N)} \equiv 1$
+
+
+
+# problems 
+- [AtCoder ABC186 E - Throne](https://atcoder.jp/contests/abc186/tasks/abc186_e)
