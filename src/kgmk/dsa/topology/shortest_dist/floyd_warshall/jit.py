@@ -3,10 +3,7 @@ import numba as nb
 
 
 
-@nb.njit(
-  (nb.i8[:, :], ),
-  cache=True,
-)
+@nb.njit((nb.i8[:, :], ), cache=True)
 def shortest_dist_floyd_warshall(
   g: np.ndarray,
 ) -> np.ndarray:
@@ -17,8 +14,5 @@ def shortest_dist_floyd_warshall(
   for k in range(n):
     for i in range(n):
       for j in range(n):
-        dist[i, j] = min(
-          dist[i, j],
-          dist[i, k] + dist[k, j],
-        )
+        dist[i, j] = min(dist[i, j], dist[i, k] + dist[k, j])
   return dist
