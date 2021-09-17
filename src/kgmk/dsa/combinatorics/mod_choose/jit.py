@@ -3,27 +3,36 @@ import numba as nb
 
 
 
-@nb.njit
+@nb.njit((nb.i8, nb.i8, nb.i8, nb.i8[:], nb.i8[:]), cache=True)
 def mod_choose(
   n: int,
   k: int,
   mod: int,
-  fact: np.array,
-  ifact: np.array,
+  fact: np.ndarray,
+  ifact: np.ndarray,
 ) -> int:
   ok = (0 <= k) & (k <= n)
-  c = fact[n] * ifact[n - k] % mod * ifact[k] % mod
-  return c * ok
+  return fact[n] * ifact[n - k] % mod * ifact[k] % mod * ok
 
 
-@nb.njit
-def inv_mod_choose(
+@nb.njit((nb.i8, nb.i8, nb.i8, nb.i8[:], nb.i8[:]), cache=True)
+def mod_choose_inverse(
   n: int,
   k: int,
   mod: int,
-  fact: np.array,
-  ifact: np.array,
+  fact: np.ndarray,
+  ifact: np.ndarray,
 ) -> int:
   ok = (0 <= k) & (k <= n)
-  c = ifact[n] * fact[n - k] % mod * fact[k] % mod
-  return c * ok
+  return ifact[n] * fact[n - k] % mod * fact[k] % mod * ok
+  
+
+@nb.njit((nb.i8, nb.i8, nb.i8, nb.i8[:], nb.i8[:]), cache=True)
+def mod_nHk(
+  n: int,
+  k: int,
+  mod: int,
+  fact: np.ndarray,
+  ifact: np.ndarray,
+) -> int:
+  return mod_choose(n + k - 1, k, mod, fact, ifact)
