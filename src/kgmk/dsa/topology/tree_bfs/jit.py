@@ -1,27 +1,15 @@
-from kgmk.dsa.topology.graph.jit.csgraph_to_undirected import (
-  csgraph_to_undirected,
-)
-from kgmk.dsa.topology.graph.jit.sort_csgraph import (
-  sort_csgraph,
-)
-
-# TODO cut below 
-
 import typing
 import numpy as np
 import numba as nb
 
 
-
-@nb.njit((nb.i8, nb.i8[:, :], nb.i8), cache=True)
+@nb.njit((nb.i8[:, :], np.i8[:], nb.i8), cache=True)
 def tree_bfs(
-  n: int, 
-  g: np.ndarray, 
+  g: np.ndarray,
+  edge_idx: np.ndarray,
   root: int,
 ) -> typing.Tuple[np.ndarray, np.ndarray]:
-  assert len(g) == n - 1
-  g = csgraph_to_undirected(g)
-  g, edge_idx, _ = sort_csgraph(n, g)
+  n = g[:, :2].max() + 1
   parent = np.full(n, -1, np.int64)
   depth = np.zeros(n, np.int64)
   que = [root]
