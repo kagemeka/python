@@ -10,10 +10,7 @@ def uf_build(n: int) -> np.ndarray:
 
 
 @nb.njit((nb.i8[:], nb.i8), cache=True)
-def uf_find(
-  uf: np.ndarray,
-  u: int,
-) -> int:
+def uf_find(uf: np.ndarray, u: int) -> int:
   if uf[u] < 0: return u
   uf[u] = uf_find(uf, uf[u])
   return uf[u]
