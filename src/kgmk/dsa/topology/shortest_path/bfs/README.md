@@ -1,8 +1,8 @@
-# Shortest Path BFS 
+# Shortest Dist BFS
 
 
 # summary
-- return predecessor
+- return dist
 
 
 # problems

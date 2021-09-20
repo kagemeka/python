@@ -1,18 +1,19 @@
+import typing 
 import numpy as np 
 import numba as nb
 import heapq
 
 
-
 @nb.njit((nb.i8[:, :], nb.i8), cache=True)
-def shortest_dist_dijkstra(
+def shortest_path_dijkstra(
   g: np.ndarray,
   src: int,
-) -> np.ndarray:
+) -> typing.Tuple[np.ndarray, np.ndarray]:
   n = len(g)
   assert g.shape == (n, n)
   inf = 1 << 60
-  assert g.max() <= inf
+  assert inf >= g.max()
+  predecessor = np.full(n, -1, np.int64)
   dist = np.full(n, inf, np.int64)
   dist[src] = 0 
   hq = [(0, src)]
@@ -23,7 +24,6 @@ def shortest_dist_dijkstra(
       dv = du + g[u, v]
       if dv >= dist[v]: continue 
       dist[v] = dv
+      predecessor[v] = u
       heapq.heappush(hq, (dv, v))
-  return dist
-
-
+  return dist, predecessor

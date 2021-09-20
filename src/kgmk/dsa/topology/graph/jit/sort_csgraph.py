@@ -14,3 +14,5 @@ def sort_csgraph(
   original_idx = np.arange(len(g))[sort_idx]
   edge_idx = np.searchsorted(g[:, 0], np.arange(n + 1))
   return g, edge_idx, original_idx 
+
+

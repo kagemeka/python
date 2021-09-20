@@ -1,8 +1,10 @@
-from ..dijkstra.jit import (
-  shortest_dist_dijkstra,
+from kgmk.dsa.topology.shortest_path.dijkstra.csgraph.jit \
+import (
+  shortest_path_dijkstra,
 )
-from ..bellman_ford.jit import (
-  shotest_dist_bellman_ford,
+from kgmk.dsa.topology.shortest_path.bellman_ford.csgraph.jit \
+import (
+  shotest_path_bellman_ford,
 )
 
 
@@ -26,11 +28,11 @@ def shotest_dist_johnson(
   new_edges[:, 0] = n
   new_edges[:, 1] = np.arange(n)
   csgraph = np.vstack((csgraph, new_edges))
-  h = shotest_dist_bellman_ford(n + 1, csgraph, n)[:-1]
+  h, _ = shotest_path_bellman_ford(n + 1, csgraph, n)[:-1]
   csgraph = csgraph[:m]
   csgraph[:, 2] += h[csgraph[:, 0]] - h[csgraph[:, 1]]
   dist = np.zeros((n, n), np.int64)
   for i in range(n):
-    d = shortest_dist_dijkstra(n, csgraph, i)
+    d, _ = shortest_path_dijkstra(n, csgraph, i)
     dist[i] = d - h[i] + h  
   return dist
