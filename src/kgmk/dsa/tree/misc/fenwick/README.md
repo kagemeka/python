@@ -15,6 +15,8 @@
   - add
 - [AtCoder ABC186 F - Rook on Grid](https://atcoder.jp/contests/abc186/tasks/abc186_f)
   - add
+- [AtCoder Typical90 017 - Crossing Segments（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_q)
+  - add
 
   
 
