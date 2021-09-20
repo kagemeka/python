@@ -5,7 +5,7 @@ import heapq
 
 
 
-@nb.njit((nb.i8, nb.i8[:, :], nb.i8), cache=True)
+@nb.njit
 def shortest_path_dijkstra(
   n: int,
   g: np.ndarray,
