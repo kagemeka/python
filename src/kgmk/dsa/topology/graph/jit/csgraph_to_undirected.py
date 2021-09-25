@@ -3,9 +3,9 @@ import numba as nb
 
 
 
-@nb.njit((nb.i8[:, :], ), cache=True)
+@nb.njit 
 def csgraph_to_undirected(g: np.ndarray) -> np.ndarray:
   m = len(g)
   g = np.vstack((g, g))
   g[m:, :2] = g[m:, 1::-1]
-  return g
+  return g 

@@ -3,29 +3,23 @@ import numpy as np
 import numba as nb 
 
 
-
-@nb.njit((nb.i8, nb.i8), cache=True)
-def fw_build(n: int, m: int) -> np.ndarray:
-  return np.zeros((n + 1, m + 1), np.int64)
-
-
-@nb.njit((nb.i8[:, :], ), cache=True)
-def fw_build_from_array(a: np.ndarray) -> np.ndarray:
-  n, m = a.shape
-  assert np.all(a[0] == 0) and np.all(a[:, 0] == 0)
-  fw = a.copy()
-  for i in range(n):
-    for j in range(m):
+@nb.njit
+def fw_build(a: np.ndarray) -> np.ndarray:
+  n, m = a.shape[:2]
+  fw = np.empty((n + 1, m + 1) + a.shape[2:], np.int64)
+  fw[1:, 1:] = a.copy()
+  for i in range(1, n + 1):
+    for j in range(1, m + 1):
       k = j + (j & -j)
-      if k < m: fw[i, k] += fw[i, j]
-  for j in range(m):
-    for i in range(n):
+      if k < m + 1: fw[i, k] += fw[i, j]
+  for j in range(1, m + 1):
+    for i in range(1, n + 1):
       k = i + (i & -i)
-      if k < n: fw[k, j] += fw[i, j]
+      if k < n + 1: fw[k, j] += fw[i, j]
   return fw
 
 
-@nb.njit((nb.i8[:, :], nb.i8, nb.i8, nb.i8), cache=True)
+@nb.njit
 def fw_set(
   fw: np.ndarray, 
   i: int, 
@@ -42,9 +36,10 @@ def fw_set(
     i += i & -i
 
 
-@nb.njit((nb.i8[:, :], nb.i8, nb.i8), cache=True)
+@nb.njit
 def fw_get(fw: np.ndarray, i: int, j:int) -> int:
   v = 0
+  i, j = i + 1, j + 1
   j0 = j 
   while i > 0:
     j = j0

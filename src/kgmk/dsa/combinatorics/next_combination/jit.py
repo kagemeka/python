@@ -2,7 +2,7 @@ import numba as nb
 
 
 
-@nb.njit((nb.i8, ), cache=True)
+@nb.njit
 def next_combination(s: int) -> int:
   i = s & -s
   j = s + i

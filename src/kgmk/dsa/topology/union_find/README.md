@@ -19,3 +19,4 @@
 - [AtCoder ABC214 D - Sum of Maximum Weights](https://atcoder.jp/contests/abc214/tasks/abc214_d)
 - [AtCoder ABC217 D - Cutting Woods](https://atcoder.jp/contests/abc217/tasks/abc217_d)
 - [AtCoder ABC219 E - Moat](https://atcoder.jp/contests/abc219/tasks/abc219_e)
+- [AtCoder ABC049 D - 連結](https://atcoder.jp/contests/abc049/tasks/arc065_b)

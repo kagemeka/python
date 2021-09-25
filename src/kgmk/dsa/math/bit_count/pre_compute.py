@@ -23,6 +23,6 @@ class BitCount():
   ) -> typing.NoReturn:
     a = [0] * n
     for i in range(n):
-      a[i] = a[i // 2] + i % 2
+      a[i] = a[i >> 1] + i & 1
     self.__a = a
     

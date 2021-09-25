@@ -4,6 +4,6 @@ import numba as nb
 
 
 
-@nb.njit 
-def mod_cumprod(a: np.ndarray, mod) -> typing.NoReturn:
+@nb.njit
+def mod_cumprod(a: np.ndarray, mod: int) -> typing.NoReturn:
   for i in range(len(a) - 1): a[i + 1] = a[i + 1] * a[i] % mod

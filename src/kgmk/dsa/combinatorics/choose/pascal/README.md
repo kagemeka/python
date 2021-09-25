@@ -12,3 +12,4 @@
 
 # problems 
 - [AtCoder ABC202 D - aab aba baa](https://atcoder.jp/contests/abc202/tasks/abc202_d)
+- [AtCoder ABC057 D - Maximum Average Sets](https://atcoder.jp/contests/abc057/tasks/abc057_d)
