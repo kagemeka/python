@@ -1,6 +1,8 @@
 # Connected Component (Graph Theory)
 
 
+# summary
+- find connected compolents on undirected graph.
 
 
 
@@ -12,5 +14,5 @@
 
 
 # problems 
-
+- [AtCoder ABC049 D - 連結](https://atcoder.jp/contests/abc049/tasks/arc065_b)
 

@@ -4,10 +4,7 @@ import typing
 
 
 @nb.njit
-def combinations(
-  n: int,
-  r: int,
-) -> np.array:
+def combinations(n: int, r: int) -> np.ndarray:
   a = np.arange(n)
   ls = []
   if r < 0 or r > n: 

@@ -4,11 +4,7 @@ import numba as nb
 
 
 @nb.njit
-def find_divisors(
-  n: int,
-) -> np.array:
-  i = np.arange(int(n ** .5))
-  i += 1
+def find_divisors(n: int) -> np.ndarray:
+  i = np.arange(int(n ** .5)) + 1
   i = i[n % i == 0]
-  i = np.hstack((i, n // i))
-  return np.unique(i)
+  return np.unique(np.hstack((i, n // i)))
