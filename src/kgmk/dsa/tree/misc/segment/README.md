@@ -6,6 +6,19 @@
 - [cp-algorithms](https://cp-algorithms.com/data_structures/segment_tree.html)
 - [wiki en](https://en.wikipedia.org/wiki/Segment_tree)
 - [catupper youtube](https://www.youtube.com/watch?v=LjhVy1ZJTMc)
+- [qiita keymoon](https://qiita.com/keymoon/items/0f929a19ed30f34ae6e8)
+- [betrue12 blog](https://betrue12.hateblo.jp/entry/2020/09/22/194541)
+- [ikatakos blog](https://ikatakos.com/pot/programming_algorithm/data_structure/segment_tree/lazy_segment_tree)
+- [tsutaj blog](https://tsutaj.hatenablog.com/entry/2017/03/30/224339)
+- [hcpc-hokudai pdf](https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf)
+- [smijake3 blog](https://smijake3.hatenablog.com/entry/2018/11/03/100133)
+- [qiita ningenMe](https://qiita.com/ningenMe/items/bf66de877e3b97d35862)
+- [codeforces blog](https://codeforces.com/blog/entry/18051)
+- [scrapbox segment_tree](https://scrapbox.io/data-structures/Segment_Tree)
+- [maspy blog-1](https://maspypy.com/segment-tree-%E3%81%AE%E3%81%8A%E5%8B%89%E5%BC%B71)
+- [maspy blog-2](https://maspypy.com/segment-tree-のお勉強2)
+- [scrapbox lazy_segment_tree](https://scrapbox.io/data-structures/Lazy_Segment_Tree)
+- [kimiyuki blog](https://kimiyuki.net/blog/2018/12/06/categories-on-segment-tree/)
 
 
 # Problems 

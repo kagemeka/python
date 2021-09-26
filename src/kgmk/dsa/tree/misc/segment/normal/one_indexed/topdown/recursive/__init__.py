@@ -11,7 +11,8 @@ import typing
 
 T = typing.TypeVar('T')
 class SegmentTree(typing.Generic[T]):
-  def __init__(self,
+  def __init__(
+    self,
     monoid: Monoid[T],
     a: typing.List[T],
   ) -> typing.NoReturn:
