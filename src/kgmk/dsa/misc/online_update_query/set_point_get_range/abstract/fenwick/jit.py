@@ -24,6 +24,11 @@ def fw_e() -> S:
 
 
 @nb.njit 
+def fw_inverse(a: S) -> S:
+  return ...
+
+
+@nb.njit 
 def build_fw(a: np.ndarray) -> np.ndarray:
   return fw_build(fw_op, a)
 
@@ -32,14 +37,19 @@ def build_fw(a: np.ndarray) -> np.ndarray:
 def set_point_fw(
   fw: np.ndarray, 
   i: int, 
-  x: int,
+  x: S,
 ) -> typing.NoReturn:
   fw_set(fw, fw_op, i, x)
 
 
 @nb.njit 
-def get_range_fw(fw: np.ndarray, l: int, r: int) -> int:
+def get_half_range_fw(fw: np.ndarray, i: int) -> S:
+  return fw_get(fw, fw_op, fw_e, i)
+
+
+@nb.njit 
+def get_range_fw(fw: np.ndarray, l: int, r: int) -> S:
   return fw_op(
-    fw_get(fw, fw_op, fw_e, r - 1), 
-    fw_get(fw, fw_op, fw_e, l - 1),
+    fw_inverse(get_half_range_fw(fw, l - 1)), 
+    get_half_range_fw(fw, r - 1),
   )
