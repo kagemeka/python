@@ -1,7 +1,7 @@
 from ...abstract.fenwick.jit import (
   build_fw,
   set_point_fw,
-  get_range_fw,
+  get_half_range_fw,
 )
 
 # TODO cut below 

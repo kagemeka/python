@@ -1,5 +1,5 @@
 from __future__ import annotations 
-from kgmk.dsa.algebra.abstract.monoid import (
+from kgmk.dsa.algebra.abstract.structure.monoid import (
   Monoid,
 )
 
@@ -12,52 +12,32 @@ import typing
 
 T = typing.TypeVar('T')
 class FenwickTree(typing.Generic[T]):
-  @classmethod 
-  def from_array(
-    cls,
+  def __init__(
+    self,
     monoid: Monoid[T],
     a: typing.List[T],
   ) -> FenwickTree[T]:
     n = len(a)
-    a = a.copy()
-    assert a[0] == monoid.e()
-    for i in range(n):
+    fw = [None] * (n + 1)
+    fw[1:] = a.copy()
+    for i in range(1, n + 1):
       j = i + (i & -i)
-      if j >= n: continue
-      a[j] = monoid.fn(a[j], a[i])
-    fw = cls(monoid, n)
-    fw._FenwickTree__a = a
-    return fw
+      if j >= n + 1: continue
+      fw[j] = monoid.op(fw[j], fw[i])
+    self.__a = fw
 
 
-  def __getitem__(
-    self,
-    i: int,
-  ) -> T:
+  def __getitem__(self, i: int) -> T:
     m = self.__monoid 
     v = m.e()
     while i > 0:
-      v = m.fn(v, self.__a[i])
+      v = m.op(v, self.__a[i])
       i -= i & -i
     return v
-
-
-  def __init__(
-    self,
-    monoid: Monoid[T],
-    n: int,
-  ) -> typing.NoReturn:
-    assert monoid.commutative 
-    self.__a = [monoid.e() for _ in range(n + 1)]
-    self.__monoid = monoid 
   
 
-  def __setitem__(
-    self,
-    i: int,
-    x: T,
-  ) -> typing.NoReturn:
+  def __setitem__(self, i: int, x: T) -> typing.NoReturn:
     a = self.__a
     while i < len(a):
-      a[i] = self.__monoid.fn(a[i], x)
+      a[i] = self.__monoid.op(a[i], x)
       i += i & -i
