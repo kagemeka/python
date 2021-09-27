@@ -19,6 +19,7 @@
 - [maspy blog-2](https://maspypy.com/segment-tree-のお勉強2)
 - [scrapbox lazy_segment_tree](https://scrapbox.io/data-structures/Lazy_Segment_Tree)
 - [kimiyuki blog](https://kimiyuki.net/blog/2018/12/06/categories-on-segment-tree/)
+- [smijake3 segtree beats](https://smijake3.hatenablog.com/entry/2019/05/18/145531)
 
 
 # Problems 

@@ -9,9 +9,5 @@ import numba as nb
 
 
 @nb.njit
-def prime_numbers(
-  n: int=1 << 20,
-) -> np.array:
-  return np.flatnonzero(
-    sieve_of_eratosthenes(n),
-  )
+def prime_numbers(n: int=1 << 20) -> np.array:
+  return np.flatnonzero(sieve_of_eratosthenes(n))
