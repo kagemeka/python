@@ -4,16 +4,12 @@ import numba as nb
 
 
 @nb.njit
-def sieve_of_eratosthenes(
-  n: int=1 << 20,
-) -> np.array:
+def sieve_of_eratosthenes(n: int=1 << 20) -> np.array:
   return gpf(n) == np.arange(n)
 
 
 @nb.njit
-def gpf(
-  n: int=1 << 20,
-) -> np.array:
+def gpf(n: int=1 << 20) -> np.array:
   s = np.arange(n)
   s[:2] = -1
   i = 0 
@@ -24,9 +20,7 @@ def gpf(
 
 
 @nb.njit
-def lpf(
-  n: int=1 << 20,
-) -> np.array:
+def lpf(n: int=1 << 20) -> np.array:
   s = np.arange(n)
   s[:2] = -1
   i = 0 
