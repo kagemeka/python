@@ -3,6 +3,8 @@
 
 # summary
 - $O(V^2E)$
+- BFS
+- DFS 
 
 
 # references
