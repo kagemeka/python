@@ -9,10 +9,11 @@ def maximum_flow_dinic(
   sink: int,
 ) -> int:
   n = len(g)
+  g = g.copy()
   inf = 1 << 60
   level = np.full(n, -1, np.int32)
   
-  def _update_level():
+  def update_level():
     level[:] = -1
     level[src] = 0
     fifo_que = [src]
@@ -26,7 +27,7 @@ def maximum_flow_dinic(
   flow_out = np.zeros(n, np.int64)
   prev = np.full(n, -1, np.int32)
 
-  def _compute_flow():
+  def compute_flow():
     flow_in[:] = 0
     flow_in[src] = inf
     flow_out[:] = 0
@@ -53,13 +54,13 @@ def maximum_flow_dinic(
         flow_out[u] = flow_in[u]
         continue
       if flow_in[u] == 0: continue
-      for v in range(n):
+      for v in range(n - 1, -1, -1):
         if g[u, v] == 0 or level[v] <= level[u]: continue
         prev[v] = u
         st.append(v)
 
   flow = 0
   while 1:
-    _update_level()
+    update_level()
     if level[sink] == -1: return flow
-    flow += _compute_flow()
+    flow += compute_flow()
