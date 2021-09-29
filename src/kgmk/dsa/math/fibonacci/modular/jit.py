@@ -2,7 +2,7 @@ import numpy as np
 import numba as nb 
 
 
-@nb.njit((nb.i8, nb.i8), cache=True)
+@nb.njit
 def mod_fibonacci_sequence(n: int, mod: int) -> np.ndarray:
   assert n >= 2
   f = np.empty(n, np.int64)

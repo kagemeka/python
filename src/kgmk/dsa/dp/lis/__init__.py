@@ -1,32 +1,10 @@
-from bisect import (
-  bisect_left,
-)
-
-
-from typing import (
-  Any,
-)
-
+import typing 
+import bisect 
 
 
 class LIS:
-
-
-  def __init__(
-    self,
-    inf: Any=float('inf'),
-  ):
-    self.inf = inf
-
-
-  def __call__(
-    self,
-    a: list,
-  ):
-    inf = self.inf
+  def __call__(self, a: typing.List[int]) -> typing.List[int]:
+    inf = 1 << 60
     lis = [inf] * len(a)
-    for x in a:
-      i = bisect_left(lis, x)
-      lis[i] = x
-    i = bisect_left(lis, inf)
-    return lis[:i]
+    for x in a: lis[bisect.bisect_left(lis, x)] = x
+    return lis[:bisect.bisect_left(lis, inf)]
