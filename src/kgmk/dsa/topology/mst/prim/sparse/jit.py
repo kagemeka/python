@@ -1,5 +1,5 @@
-from ....graph.jit.csgraph_to_undirected import (
-  csgraph_to_undirected,
+from ....graph.jit.csgraph_to_directed import (
+  csgraph_to_directed,
 )
 # TODO cut below 
 
@@ -22,7 +22,7 @@ def mst_prim_sparse(
   assert csgraph.shape == (m, 3)
   inf = 1 << 60
   assert np.all(csgraph[:, 2] < inf) 
-  csgraph = csgraph_to_undirected(csgraph)
+  csgraph = csgraph_to_directed(csgraph)
   m *= 2
   sort_idx = np.argsort(csgraph[:, 0], kind='mergesort')
   csgraph = csgraph[sort_idx]
