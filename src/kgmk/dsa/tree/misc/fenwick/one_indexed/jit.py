@@ -48,11 +48,11 @@ def fw_get(
 
 
 @nb.njit
-def fw_lower_bound(
+def fw_max_right(
   fw: np.ndarray,
   op: typing.Callable[[S, S], S],
   e: typing.Callable[[], S],
-  search_fn: typing.Callable[[S], bool], # fn(v, (x)) -> bool
+  is_ok: typing.Callable[[S], bool], # fn(v, (x)) -> bool
   x: S, # cuz it's impossible to use closure on numba(v0.53.1).
 ) -> int:
   n = len(fw)
@@ -60,7 +60,7 @@ def fw_lower_bound(
   while l << 1 < n: l <<= 1
   v, i = e(), 0
   while l:
-    if i + l < n and not search_fn(op(v, fw[i + l]), k):
+    if i + l < n and is_ok(op(v, fw[i + l]), x):
       i += l
       v = op(v, fw[i])
     l >>= 1

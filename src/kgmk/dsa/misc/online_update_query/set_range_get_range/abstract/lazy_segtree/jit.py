@@ -1,9 +1,11 @@
 import typing 
-import sys 
 import numpy as np 
 import numba as nb 
 
-from kgmk.dsa.tree.misc.segment.lazy.bottomup.jit import (
+from \
+  kgmk.dsa.tree.misc.segment.lazy.one_indexed \
+  .bottomup.jit \
+import (
   seg_build,
   seg_get,
   seg_set,

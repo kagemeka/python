@@ -19,9 +19,8 @@ def seg_build(
 ) -> np.ndarray:
   n = 1 << bit_length(len(a) - 1)
   seg = np.empty((n << 1, ) + a.shape[1:], np.int64)
+  for i in range(n << 1): seg[i] = e()
   seg[n:n + len(a)] = a.copy()
-  for i in range(n + len(a), n << 1):
-    seg[i] = e()
   for i in range(n - 1, 0, -1):
     seg[i] = op(seg[i << 1], seg[i << 1 | 1])
   return seg 
