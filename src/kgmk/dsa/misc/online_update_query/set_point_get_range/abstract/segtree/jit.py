@@ -1,6 +1,6 @@
 from \
   kgmk.dsa.tree.misc.segment.normal.one_indexed \
-  .non_recursive.jit \
+  .bottomup.jit \
 import (
   seg_build,
   seg_set,
@@ -30,8 +30,8 @@ def seg_e() -> S:
 
 @nb.njit 
 def build_seg(a: np.ndarray) -> np.ndarray:
-  return seg_build(seg_op, a)
-
+  return seg_build(seg_op, seg_e, a)
+  
 
 @nb.njit 
 def set_point_seg(
