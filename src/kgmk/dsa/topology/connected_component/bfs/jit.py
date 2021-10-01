@@ -1,5 +1,5 @@
-from kgmk.dsa.topology.graph.jit.csgraph_to_undirected import (
-  csgraph_to_undirected,
+from kgmk.dsa.topology.graph.jit.csgraph_to_directed import (
+  csgraph_to_directed,
 )
 from kgmk.dsa.topology.graph.jit.sort_csgraph import (
   sort_csgraph,
@@ -15,7 +15,7 @@ import numba as nb
 
 @nb.njit((nb.i8, nb.i8[:, :]), cache=True)
 def connected_components_bfs(n: int, g: np.ndarray):
-  g = csgraph_to_undirected(g)
+  g = csgraph_to_directed(g)
   g, edge_idx, _ = sort_csgraph(n, g)
   label = np.full(n, -1, np.int64)
   l = 0 

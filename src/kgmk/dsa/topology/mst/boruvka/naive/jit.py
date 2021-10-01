@@ -1,5 +1,5 @@
-from ....graph.jit.csgraph_to_undirected import (
-  csgraph_to_undirected,
+from ....graph.jit.csgraph_to_directed import (
+  csgraph_to_directed,
 )
 
 # TODO cut below 
@@ -22,7 +22,7 @@ def mst_boruvka(
   inf = 1 << 60
   assert csgraph[:, 2].max() < inf
 
-  csgraph = csgraph_to_undirected(csgraph)
+  csgraph = csgraph_to_directed(csgraph)
   rev_edge_idx = np.zeros(m * 2, np.int64)
   rev_edge_idx[:m] = np.arange(m, 2 * m)
   rev_edge_idx[m:] = np.arange(m)
