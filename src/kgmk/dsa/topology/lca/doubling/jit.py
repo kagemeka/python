@@ -15,8 +15,8 @@ def tree_bfs(
   edge_idx: np.ndarray,
   root: int,
 ) -> typing.Tuple[np.ndarray, np.ndarray]:
-  parent = np.full(n, -1, np.int32)
-  depth = np.zeros(n, np.int32)
+  parent = np.full(n, -1, np.int64)
+  depth = np.zeros(n, np.int64)
   fifo_que = [root] 
   for u in fifo_que:
     for v in g[edge_idx[u]:edge_idx[u + 1], 1]:
@@ -36,7 +36,7 @@ def lca_preprocess(
 ) -> np.ndarray:
   parent, depth = tree_bfs(n, g, edge_idx, root)
   k = bit_length(depth.max())
-  ancestors = np.empty((k, n), np.int32)
+  ancestors = np.empty((k, n), np.int64)
   ancestors[0] = parent.copy()
   ancestors[0, root] = root
   for i in range(k - 1):

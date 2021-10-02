@@ -10,8 +10,8 @@ def tree_bfs(
   root: int,
 ) -> typing.Tuple[np.ndarray, np.ndarray]:
   n = g[:, :2].max() + 1
-  parent = np.full(n, -1, np.int32)
-  depth = np.zeros(n, np.int32)
+  parent = np.full(n, -1, np.int64)
+  depth = np.zeros(n, np.int64)
   fifo_que = [root]
   for u in fifo_que:
     for v in g[edge_idx[u]:edge_idx[u + 1], 1]:

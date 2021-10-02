@@ -1,5 +1,7 @@
-from kgmk.dsa.topology.euler_tour.non_recursive.jit import (
-  euler_tour,
+from \
+  kgmk.dsa.topology.euler_tour.edge.non_recursive.jit \
+import (
+  euler_tour_edge,
 )
 from kgmk.dsa.math.bit_length.table.jit import (
   bit_length_table,
@@ -29,11 +31,11 @@ def lca_preprocess(
   edge_idx: np.ndarray,
   root: int,
 ) -> np.ndarray:
-  tour, parent, depth = euler_tour(g, edge_idx, root)
+  tour, parent, depth = (g, edge_idx, root)
   for i in range(n * 2):
     if tour[i] < 0: tour[i] = parent[~tour[i]]
   tour = tour[:-1]
-  first_idx = np.full(n, -1, np.int32)
+  first_idx = np.full(n, -1, np.int64)
   for i in range(n * 2 - 1):
     u = tour[i]
     if first_idx[u] != -1: continue

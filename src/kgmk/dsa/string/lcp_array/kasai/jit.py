@@ -11,9 +11,9 @@ def lcp_kasai(
   n = a.size
   assert n > 0 and sa.size == n
   
-  rank = np.empty(n, np.int32)
+  rank = np.empty(n, np.int64)
   for i in range(n): rank[sa[i]] = i
-  h, l = np.empty(n - 1, np.int32), 0
+  h, l = np.empty(n - 1, np.int64), 0
   for i in range(n):
     if l: l -= 1
     r = rank[i]

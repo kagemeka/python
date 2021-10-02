@@ -45,7 +45,7 @@ def shortest_dist_desepo_pape(
     return dq_l == dq_r + 1
   
   deque_append(src)
-  state = np.full(n, -1, np.int8)
+  state = np.full(n, -1, np.int64)
 
   while not deque_empty():
     u = deque_popleft()

@@ -11,7 +11,7 @@ def maximum_flow_ford_fulkerson(
   n = len(g)
   inf = 1 << 60
   g = g.copy()
-  prev = np.empty(n, np.int32)
+  prev = np.empty(n, np.int64)
   visited = np.zeros(n, np.bool8)
 
   def find_path():

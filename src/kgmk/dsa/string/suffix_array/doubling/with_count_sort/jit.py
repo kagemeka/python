@@ -13,12 +13,12 @@ def sa_doubling(
     np.unique(a),
     a,
   )
-  cnt = np.zeros(n + 1, dtype=np.int32)
+  cnt = np.zeros(n + 1, dtype=np.int64)
   
   def count_sort(a):
     for x in a: cnt[x + 1] += 1
     for i in range(n): cnt[i + 1] += cnt[i]
-    idx = np.empty(n, dtype=np.int32)
+    idx = np.empty(n, dtype=np.int64)
     for i in range(n):
       x = a[i]
       idx[cnt[x]] = i

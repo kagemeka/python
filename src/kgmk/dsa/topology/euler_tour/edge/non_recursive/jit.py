@@ -4,15 +4,15 @@ import numba as nb
 
 
 @nb.njit
-def euler_tour(
+def euler_tour_edge(
   g: np.ndarray,
   edge_idx: np.ndarray,
   root: int,
-) -> typing.Tuple[np.ndarray, np.ndarray, np.ndarray]:
+) -> typing.Tuple[(np.ndarray, ) * 3]:
   n = g[:, :2].max() + 1
-  parent = np.full(n, -1, np.int32)
-  depth = np.zeros(n, np.int32)
-  tour = np.empty(n * 2, np.int32)
+  parent = np.full(n, -1, np.int64)
+  depth = np.zeros(n, np.int64)
+  tour = np.empty(n * 2, np.int64)
   st = [root]
   for i in range(2 * n):
     u = st.pop()
