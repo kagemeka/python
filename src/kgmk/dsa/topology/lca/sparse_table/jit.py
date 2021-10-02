@@ -1,28 +1,25 @@
-from \
-  kgmk.dsa.tree.misc.segment.normal.one_indexed.bottomup \
-  .jit \
-import (
-  seg_max_right,
-)
 from kgmk.dsa.topology.euler_tour.non_recursive.jit import (
   euler_tour,
 )
-from \
-  kgmk.dsa.misc.online_update_query.set_point_get_range \
-  .update_min.segtree.jit \
-import (
-  seg_e,
-  seg_op,
-  build_seg,
-  get_range_seg,
+from kgmk.dsa.math.bit_length.table.jit import (
+  bit_length_table,
 )
-
+from kgmk.dsa.misc.sparse_table.normal.jit import (
+  sparse_table_build,
+  sparse_table_get,
+  S,
+)
 
 # TODO cut below 
 
-import typing 
+
 import numpy as np 
 import numba as nb 
+
+
+@nb.njit 
+def sparse_table_op(x: S, y: S) -> S:
+  return x if x[0] <= y[0] else y 
 
 
 @nb.njit 
@@ -41,23 +38,25 @@ def lca_preprocess(
     u = tour[i]
     if first_idx[u] != -1: continue
     first_idx[u] = i
-  seg = build_seg(depth[tour])
-  return tour, first_idx, seg
+  a = np.empty((len(tour), 2), np.int64)
+  a[:, 0], a[:, 1] = depth[tour], tour
+  bit_len = bit_length_table(n * 2)
+  table = sparse_table_build(bit_len, sparse_table_op, a)
+  return first_idx, table, bit_len
  
 
 
 @nb.njit 
 def lca(
-  tour: np.ndarray,
   first_idx: np.ndarray,
-  seg: np.ndarray,
+  sparse_table: np.ndarray,
+  bit_len, 
   u: int,
   v: int,
 ) -> int:
   l, r = first_idx[u], first_idx[v]
   if l > r: l, r = r, l
-  mn = get_range_seg(seg, l, r + 1)
-  is_ok = lambda x, mn: x > mn
-  size = len(tour)
-  i = seg_max_right(seg, seg_op, seg_e, is_ok, mn, l, size)
-  return tour[i]
+  return sparse_table_get(
+    bit_len, sparse_table, sparse_table_op, 
+    l, r,
+  )[1]

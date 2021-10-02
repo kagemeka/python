@@ -2,14 +2,14 @@
 
 
 # implementation
-- tree doubling
+- calc ancestors with tree doubling 
   - $O(N\log{N})$ preprocessing
   - $O(\log{N})$ per query.
   - https://cp-algorithms.com/graph/lca_binary_lifting.html
 
 - euler tour + Range Minimum Query
   - $O(N)$ preprocessing
-  - $O(\log{N}) per query.
+  - $O(\log{N})$ per query.
   - https://cp-algorithms.com/graph/lca.html
 
 - Farach-Colton and Bender Algorithm 

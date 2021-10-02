@@ -1,4 +1,4 @@
-from kgmk.dsa.math.bit_length.jit import bit_length
+from kgmk.dsa.math.bit_length.naive.jit import bit_length
 from kgmk.dsa.topology.tree_bfs.jit import tree_bfs
 
 # TODO cut below
