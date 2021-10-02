@@ -1,4 +1,4 @@
-from kgmk.dsa.math.bit_length.jit import (
+from kgmk.dsa.math.bit_length.naive.jit import (
   bit_length,
 )
 

@@ -1,4 +1,4 @@
-from kgmk.dsa.math.bit_length.jit import (
+from kgmk.dsa.math.bit_length.naive.jit import (
   bit_length,
 )
 
@@ -50,7 +50,7 @@ def seg_get(
 ) -> int:
   n = len(seg) >> 1
   l, r = l + n, r + n 
-  vl = vr = e()
+  vl, vr = e(), e()
   while l < r:
     if l & 1:
       vl = op(vl, seg[l])
