@@ -36,7 +36,7 @@ def _induce(
   bucket: np.ndarray,
 ) -> np.ndarray:
   n, m = a.size, bucket.size
-  sa = np.full(n, -1, np.int32)
+  sa = np.full(n, -1, np.int64)
   
   def _set_lms():
     sa_idx = bucket.cumsum()
@@ -106,7 +106,7 @@ def sa_is(
     a = _compute_next_array(a, sa, is_lms)
     l = lms.size
     if a.max() < l - 1: continue
-    lms_order = np.empty(l, np.int32)
+    lms_order = np.empty(l, np.int64)
     for i in range(l): lms_order[a[i]] = i
     break
 

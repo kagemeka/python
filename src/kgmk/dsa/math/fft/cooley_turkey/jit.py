@@ -14,7 +14,7 @@ def fft(
   assert 1 << h == n
   
   def _reverse_bits():
-    idx = np.empty(n, dtype=np.int32)
+    idx = np.empty(n, dtype=np.int64)
     for i in range(n):
       j = 0
       for k in range(h):

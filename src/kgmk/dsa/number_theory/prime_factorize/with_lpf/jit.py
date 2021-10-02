@@ -29,7 +29,7 @@ def prime_factorize_factorial(
   lpf: np.array,
 ) -> np.array:
   prime, cnt = [], []
-  idx = np.full(n + 1, -1, dtype=np.int32)
+  idx = np.full(n + 1, -1, dtype=np.int64)
   for i in range(n + 1):
     for p, c in prime_factorize(i, lpf):
       i = idx[p]

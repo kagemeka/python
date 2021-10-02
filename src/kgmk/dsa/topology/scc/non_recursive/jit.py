@@ -20,13 +20,13 @@ def scc(n: int, g: np.ndarray) -> np.ndarray:
       while st:
         u = st.pop()
         if u < 0:
-          u = -u - 1
+          u = ~u
           que[ptr] = u
           ptr -= 1
           continue
         if visited[u]: continue
         visited[u] = True
-        st.append(-u - 1)
+        st.append(~u)
         for v in g[edge_idx[u]:edge_idx[u + 1], 1][::-1]:
           if visited[v]: continue
           st.append(v)

@@ -11,8 +11,8 @@ def maximum_flow_edmonds_karp(
   n = len(g)
   inf = 1 << 60
   g = g.copy()
-  prev = np.empty(n, np.int32)
-  level = np.empty(n, np.int32)
+  prev = np.empty(n, np.int64)
+  level = np.empty(n, np.int64)
 
   def find_path():
     prev[:] = -1

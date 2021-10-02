@@ -20,7 +20,7 @@ def sa_is(
   is_lms = np.zeros(n, np.bool8)
   for i in range(1, n): is_lms[i] = is_s[i] & ~is_s[i - 1]
   lms = np.flatnonzero(is_lms)
-  bucket = np.zeros(m, np.int32)
+  bucket = np.zeros(m, np.int64)
   for x in a: bucket[x] += 1  
 
   def _induce():

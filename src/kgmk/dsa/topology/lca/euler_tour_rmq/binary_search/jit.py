@@ -4,8 +4,10 @@ from \
 import (
   seg_max_right,
 )
-from kgmk.dsa.topology.euler_tour.non_recursive.jit import (
-  euler_tour,
+from \
+  kgmk.dsa.topology.euler_tour.edge.non_recursive.jit \
+import (
+  euler_tour_edge,
 )
 from \
   kgmk.dsa.misc.online_update_query.set_point_get_range \
@@ -32,11 +34,11 @@ def lca_preprocess(
   edge_idx: np.ndarray,
   root: int,
 ) -> np.ndarray:
-  tour, parent, depth = euler_tour(g, edge_idx, root)
+  tour, parent, depth = euler_tour_edge(g, edge_idx, root)
   for i in range(n * 2):
     if tour[i] < 0: tour[i] = parent[~tour[i]]
   tour = tour[:-1]
-  first_idx = np.full(n, -1, np.int32)
+  first_idx = np.full(n, -1, np.int64)
   for i in range(n * 2 - 1):
     u = tour[i]
     if first_idx[u] != -1: continue
