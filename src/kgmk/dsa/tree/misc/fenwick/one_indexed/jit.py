@@ -17,34 +17,35 @@ def fw_build(
     j = i + (i & -i)
     if j < n + 1: fw[j] = op(fw[j], fw[i])
   return fw 
-      
+
 
 @nb.njit 
 def fw_set(
-  fw: np.ndarray,
   op: typing.Callable[[S, S], S],
+  fw: np.ndarray,
   i: int,
   x: S,
 ) -> typing.NoReturn:
+  assert 0 <= i < len(fw) - 1
   i += 1
   while i < len(fw):
     fw[i] = op(fw[i], x)
-    i += i & -i
+    i += i & -i 
 
 
 @nb.njit 
 def fw_get(
-  fw: np.ndarray,
   op: typing.Callable[[S, S], S],
   e: typing.Callable[[], S],
+  fw: np.ndarray,
   i: int,
-) -> typing.NoReturn:
-  i += 1
+) -> S:
+  assert 0 <= i < len(fw)
   v = e()
   while i > 0:
     v = op(v, fw[i])
-    i -= i & -i
-  return v
+    i -= i & -i 
+  return v 
 
 
 @nb.njit
@@ -52,8 +53,8 @@ def fw_max_right(
   fw: np.ndarray,
   op: typing.Callable[[S, S], S],
   e: typing.Callable[[], S],
-  is_ok: typing.Callable[[S], bool], # fn(v, (x)) -> bool
-  x: S, # cuz it's impossible to use closure on numba(v0.53.1).
+  is_ok: typing.Callable[[S], bool], # fn(v) -> bool
+  x: S, # fn(v, x) cuz closure is not supported on v0.53.1.
 ) -> int:
   n = len(fw)
   l = 1

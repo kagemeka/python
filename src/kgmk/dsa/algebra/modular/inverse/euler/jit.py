@@ -1,4 +1,4 @@
-from kgmk.dsa.algebra.modular.pow.non_recursive.jit import (
+from kgmk.dsa.algebra.modular.pow.bottomup.jit import (
   mod_pow,
 )
 from kgmk.dsa.number_theory.euler_totient.naive.jit import (
@@ -9,7 +9,6 @@ from kgmk.dsa.number_theory.euler_totient.naive.jit import (
 import numba as nb 
 
 
-@nb.njit((nb.i8, nb.i8), cache=True)
+@nb.njit
 def mod_inverse(a: int, n: int) -> int:
-  phi = euler_totient(n)
-  return mod_pow(a, phi - 1, n)
+  return mod_pow(a, euler_totient(n) - 1, n)

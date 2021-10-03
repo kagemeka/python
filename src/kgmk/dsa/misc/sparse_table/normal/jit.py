@@ -41,6 +41,6 @@ def sparse_table_get(
 
 
 @nb.njit 
-def sparse_table_op(x: S, y: S) -> S:
+def sparse_table_op(a: S, b: S) -> S:
   return ...
   
