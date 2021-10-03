@@ -3,31 +3,34 @@
 
 # summary
 - answer for range query on an array fast.
-- target array should have Commutative Monoid $(S, *, e)$ on it.
+- target array should have Commutative Monoid $(S, \cdot, e)$ on it.
 
 ## use case
 - point set, range get
 - range set, point get
 - range set, range get (using two fenwick trees)
-- binary search (it's needed to be that $\sum_{j=0}^{i} A_i$ is `monotonic` on $i$. 
-  - ($\sum$ means cumulative operation on the Commutative Monoid)
+- binary search (it's needed to be that $\prod_{j=0}^{i - 1} A_j$ is `monotonic` on $i$. 
+  - ($\prod$ means cumulative operation on the Commutative Monoid)
 
-## note
+## interface
 - both get and set operation is $O(\log(N))$.
-- $\text{set}(i, x)$: $A_i = A_i * x \ (0 \le i \lt N)$.
-- $\text{get}(i)$: return $\sum_{j=0}^{i}A_j$.
-  - ($\sum$ means cumulative operation on the Commutative Monoid)
-- $\text{get}(l, r)$: return $\sum_{i=l}^{r - 1}A_i$.
-  - ($\sum$ means cumulative operation on the `Abelian Group`)
-  - Abelian Group $\rightarrow$ Commutative Monoid
-  - Abelian Group $\not \leftarrow$ Commutative Monoid
-- $\text{set}(l, r, x)$: $\forall{l \le i \lt r}\ A_i = A_i * x$
-  - fenwick tree stores delta values, that is, $d_i = A_i * A_{i - 1}^{-1}$
+- $\text{set}(i, x)$: $A_i := A_i \cdot x \ (0 \le i \lt N)$.
+- $\text{get}(i)$: return $\prod_{j=0}^{i - 1}A_j$.
+  - ($\prod$ means cumulative operation on the Commutative Monoid)
+- $\text{get}(l, r)$: return $\prod_{i=l}^{r - 1}A_i$.
+  - ($\prod$ means cumulative operation on the `Abelian Group`)
+  - Abelian Group $\leq$ Commutative Monoid
+- $\text{set}(l, r, x)$: $\forall{l \le i \lt r}\ A_i = A_i \cdot x$
+  - fenwick tree stores delta values, that is, $\delta_i = A_i \cdot A_{i - 1}^{-1}$
   - $A_i^{-1}$ means inverse of $A_i$ on the Abelian Group.
-  - in this use case, $\text{get}(i)$: return $A_i = \sum_{j=0}^{i}d_j$
+    - $A_{-1}^{-1} := e$
+  - in this use case, $\text{get}(i + 1)$: return $e + \sum_{j=0}^{i}\delta_j = A_i$
   
 - Any `Commutative Monoid` can be stored on FenwickTree.
   - but it's needed to be `Abelian Group` to implement get or set range $[l, r)$ value.
+- max_right
+  - return max $i$ such that $ok(\prod_{j = 0}^{i - 1})$
+
 
 ## Commutative Monoid Example 
 - (integer, $\max{(a, b)}$, $-\inf$), (monotoinic)

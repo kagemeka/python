@@ -6,11 +6,9 @@ from kgmk.dsa.math.extended_gcd.recursive.jit import (
 import numba as nb 
 
 
-@nb.njit((nb.i8, nb.i8), cache=True)
+@nb.njit
 def mod_inv(a: int, mod: int) -> int:
-  g, p, q = ext_gcd(a, mod)
-  if g != 1:
-    raise ArithmeticError(
-      'modular multiplicative inverse does not exist.'
-    )
-  return p % mod
+  g, p, _ = ext_gcd(a, mod)
+  if g == 1: return p % mod
+  msg = 'Modular multiplicative inverse does not exist.'
+  raise ArithmeticError(msg)

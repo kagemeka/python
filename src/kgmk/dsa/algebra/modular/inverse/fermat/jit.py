@@ -1,4 +1,4 @@
-from kgmk.dsa.algebra.modular.pow.non_recursive.jit import (
+from kgmk.dsa.algebra.modular.pow.bottomup.jit import (
   mod_pow,
 )
 

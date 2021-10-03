@@ -1,8 +1,3 @@
-from ...abstract.fenwick.jit import (
-  build_fw,
-  set_point_fw,
-  get_half_range_fw,
-)
 from kgmk.dsa.math.gcd.non_recursive.jit import (
   gcd,
 )
@@ -11,13 +6,8 @@ from kgmk.dsa.math.gcd.non_recursive.jit import (
 import numba as nb 
 
 
-
 @nb.njit
-def fw_op(a: int, b: int) -> int:
-  return gcd(a, b)
-
+def fw_op(a: int, b: int) -> int: return gcd(a, b)
 
 @nb.njit 
-def fw_e() -> int:
-  return 0
-
+def fw_e() -> int: return 0
