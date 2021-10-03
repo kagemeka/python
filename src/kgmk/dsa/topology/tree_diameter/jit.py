@@ -8,9 +8,17 @@ import numpy as np
 import numba as nb 
 
 
-@nb.njit((nb.i8[:, :], nb.i8), cache=True)
-def tree_diameter(g: np.ndarray, edge_idx: np.ndarray) -> int:
+@nb.njit
+def tree_diameter_path(
+  g: np.ndarray, 
+  edge_idx: np.ndarray,
+) -> np.ndarray:
   _, depth = tree_bfs(g, edge_idx, 0)
-  root = np.argmax(depth)
-  _, depth = tree_bfs(g, edge_idx, root)
-  return depth.max()
+  parent, depth = tree_bfs(g, edge_idx, np.argmax(depth))
+  u = np.argmax(depth)
+  d = depth[u]
+  path = np.empty(d + 1, np.int64)
+  for i in range(d + 1):
+    path[i] = u
+    u = parent[u]
+  return path
