@@ -8,7 +8,7 @@ def tree_bfs(
   g: np.ndarray,
   edge_idx: np.ndarray,
   root: int,
-) -> typing.Tuple[np.ndarray, np.ndarray]:
+) -> typing.Tuple[(np.ndarray, ) * 2]:
   n = g[:, :2].max() + 1
   parent = np.full(n, -1, np.int64)
   depth = np.zeros(n, np.int64)
