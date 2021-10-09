@@ -8,8 +8,11 @@ import numba as nb
 
 
 @nb.njit
-def scc(n: int, g: np.ndarray) -> np.ndarray:
-  def _scc_dfs(n, g): 
+def strongly_connected_components(
+  n: int, 
+  g: np.ndarray,
+) -> np.ndarray:
+  def scc_dfs(n, g): 
     g, edge_idx, _ = sort_csgraph(n, g)
     que = np.empty(n, np.int64)
     ptr = -1 
@@ -20,19 +23,17 @@ def scc(n: int, g: np.ndarray) -> np.ndarray:
       while st:
         u = st.pop()
         if u < 0:
-          u = ~u
-          que[ptr] = u
+          que[ptr] = ~u
           ptr -= 1
           continue
         if visited[u]: continue
         visited[u] = True
         st.append(~u)
         for v in g[edge_idx[u]:edge_idx[u + 1], 1][::-1]:
-          if visited[v]: continue
-          st.append(v)
+          if not visited[v]: st.append(v)
     return que
 
-  def _scc_reverse_dfs(n, g, que):
+  def scc_reverse_dfs(n, g, que):
     g[:, :2] = g[:, 1::-1]
     g, edge_idx, _ = sort_csgraph(n, g)
     label = np.full(n, -1, np.int64)
@@ -51,5 +52,5 @@ def scc(n: int, g: np.ndarray) -> np.ndarray:
     return label
   
   g = g.copy()
-  que = _scc_dfs(n, g)
-  return _scc_reverse_dfs(n, g, que)
+  que = scc_dfs(n, g)
+  return scc_reverse_dfs(n, g, que)

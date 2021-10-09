@@ -1,11 +1,9 @@
-from ..gcd.non_recursive.jit import (
-  gcd,
-)
+from ..gcd.non_recursive.jit import gcd
 
 # TODO cut below 
 
-import numba 
+import numba as nb
 
 
-def lcm(a: int, b: int) -> int:
-  return a // gcd(a, b) * b
+@nb.njit
+def lcm(a: int, b: int) -> int: return a // gcd(a, b) * b

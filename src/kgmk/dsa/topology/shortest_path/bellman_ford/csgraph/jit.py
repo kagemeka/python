@@ -4,12 +4,12 @@ import numba as nb
 
 
 
-@nb.njit((nb.i8, nb.i8[:, :], nb.i8), cache=True)
-def shotest_path_bellman_ford(
+@nb.njit
+def shortest_path_bellman_ford(
   n: int,
   g: np.ndarray,
   src: int,
-) -> typing.Tuple[np.ndarray, np.ndarray]:
+) -> typing.Tuple[(np.ndarray, ) * 2]:
   m = len(g)
   assert g.shape == (m, 3)
   inf = 1 << 60
