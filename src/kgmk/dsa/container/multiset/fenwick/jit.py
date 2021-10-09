@@ -1,4 +1,5 @@
 # use with coordinates compression.
+# values range is limited [0, n) because of Fenwick Tree.
 
 from \
   kgmk.dsa.misc.online_update_query.set_point_get_range \

@@ -5,6 +5,7 @@ import (
   seg_build,
   seg_set,
   seg_get,
+  seg_max_right,
 )
   
 
@@ -40,6 +41,17 @@ def operate_seg(
 ) -> typing.NoReturn:
   set_seg(seg, i, seg_op(get_seg(seg, i, i + 1), x))
   
+
+@nb.njit 
+def max_right_seg(
+  seg: np.ndarray,
+  is_ok: typing.Callable[[S], bool],
+  x: S,
+  l: int,
+  size: int,
+) -> int:
+  return seg_max_right(seg_op, seg_e, seg, is_ok, x, l, size)
+
 
 @nb.njit 
 def seg_op(a: S, b: S) -> S: return ...
