@@ -4,10 +4,9 @@ import numba as nb
 
 
 S = typing.TypeVar('S')
-
-@nb.njit 
+@nb.njit
 def fw_build(
-  op: typing.Callable[[S, S], S], 
+  op: typing.Callable[[S, S], S],
   a: np.ndarray,
 ) -> np.ndarray:
   n = len(a)
@@ -16,7 +15,7 @@ def fw_build(
   for i in range(1, n + 1):
     j = i + (i & -i)
     if j < n + 1: fw[j] = op(fw[j], fw[i])
-  return fw 
+  return fw
 
 
 @nb.njit 
@@ -50,11 +49,11 @@ def fw_get(
 
 @nb.njit
 def fw_max_right(
-  fw: np.ndarray,
   op: typing.Callable[[S, S], S],
   e: typing.Callable[[], S],
+  fw: np.ndarray,
   is_ok: typing.Callable[[S], bool], # fn(v) -> bool
-  x: S, # fn(v, x) cuz closure is not supported on v0.53.1.
+  x: S, # fn(v, x) cuz closure is not supported on nb v0.53.1.
 ) -> int:
   n = len(fw)
   l = 1

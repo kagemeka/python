@@ -8,7 +8,7 @@ import numba as nb
 def sort_csgraph(
   n: int, 
   g: np.ndarray,
-) -> typing.Tuple[np.ndarray, np.ndarray, np.ndarray]:
+) -> typing.Tuple[(np.ndarray, ) * 3]:
   sort_idx = np.argsort(g[:, 0], kind='mergesort')
   g = g[sort_idx]
   edge_idx = np.searchsorted(g[:, 0], np.arange(n + 1))

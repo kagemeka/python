@@ -1,49 +1,25 @@
-from __future__ import (
-  annotations,
-)
-
+from __future__ import annotations
 from enum import Enum 
-from dataclasses import (
-  dataclass,
-  astuple,
-  asdict,
-  fields,
-  make_dataclass,
-)
-
-from typing import (
-  NamedTuple, 
-  Iterable,
-  Union,
-  Dict,
-)
-
-from abc import (
-  ABC,
-)
+import dataclasses
+import typing
+import abc 
+import math
 
 
-from math import (
-  sqrt,
-)
+@dataclasses.dataclass
+class Vector(abc.ABC):
 
-
-@dataclass
-class Vector(ABC):
-
-  def __iter__(self):
-    return iter(astuple(self))
+  def __iter__(self) -> typing.Iterator[int]:
+    return iter(dataclasses.astuple(self))
   
 
   def clone(self):
-    return self.__class__(
-      *self,
-    )
+    return self.__class__(*self)
 
   
   def __add__(self, other):
     x = self.clone()
-    for f in fields(x):
+    for f in dataclasses.fields(x):
       f = f.name
       i = getattr(x, f)
       j = getattr(other, f)
@@ -58,7 +34,7 @@ class Vector(ABC):
   def __neg__(self):
     return self.__class__(*(
       -getattr(self, f.name)
-      for f in fields(self)
+      for f in dataclasses.fields(self)
     ))
 
   
@@ -72,7 +48,7 @@ class Vector(ABC):
 
   def __matmul__(self, other):
     p = 0
-    for f in fields(self):
+    for f in dataclasses.fields(self):
       f = f.name
       i = getattr(self, f)
       j = getattr(other, f)
@@ -82,7 +58,7 @@ class Vector(ABC):
 
   def __mul__(self, r: float):
     x = self.clone()
-    for f in fields(x):
+    for f in dataclasses.fields(x):
       f = f.name
       i = getattr(x, f)
       setattr(x, f, r * i)
@@ -97,17 +73,11 @@ class Vector(ABC):
     return self * r 
   
 
-  def __truediv__(
-    self,
-    r: float,
-  ):
+  def __truediv__(self, r: float):
     return self * (1 / r)
 
 
-  def __itruediv__(
-    self, 
-    r: float,
-  ):
+  def __itruediv__(self, r: float):
     return self / r
 
 
@@ -118,12 +88,12 @@ class Vector(ABC):
       for x in
       self.asdict().values()
     )
-    return sqrt(s)
+    return math.sqrt(s)
     
 
   @classmethod 
   def define(cls, n):
-    vector = make_dataclass(
+    vector = dataclasses.make_dataclass(
       cls_name='vector',
       fields=[
         (f'x{i}', float, 0)
@@ -135,11 +105,11 @@ class Vector(ABC):
 
   
   def asdict(self):
-    return asdict(self)
+    return dataclasses.asdict(self)
 
 
 
-@dataclass
+@dataclasses.dataclass
 class Vector2D(Vector):
   x: float = 0
   y: float = 0

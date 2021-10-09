@@ -1,10 +1,5 @@
-from ..gcd.recursive import (
-  GCD,
-)
+from kgmk.dsa.math.gcd.recursive import gcd
 # TODO cut below
 
 
-
-class LCM():
-  def __call__(self, a: int, b: int) -> int:
-    return a // GCD()(a, b) * b
+def lcm(a: int, b: int) -> int: return a // gcd(a, b) * b
