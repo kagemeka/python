@@ -1,6 +1,4 @@
-from kgmk.dsa.math.bit_length.naive.jit import (
-  bit_length,
-)
+from kgmk.dsa.math.bit_length.naive.jit import bit_length
 
 # TODO cut below 
 
@@ -10,7 +8,6 @@ import numba as nb
 
 
 S = typing.TypeVar('S')
-
 @nb.njit 
 def seg_build(
   op: typing.Callable[[S, S], S],
